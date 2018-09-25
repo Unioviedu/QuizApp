@@ -1,8 +1,12 @@
-package com.uniovi.quizapp;
+package quizapp.db.generatedb;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
+import com.mongodb.MongoClient;
 import com.uniovi.quizapp.dataacess.model.Challange;
 import com.uniovi.quizapp.dataacess.model.Level;
 import com.uniovi.quizapp.dataacess.model.Section;
@@ -15,11 +19,19 @@ import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
 
 public class GenerateDB {
+	
 	List<Challange> challanges = new ArrayList<>();
 	List<Section> sections = new ArrayList<>();
 	User user;
 	
 	public void create() {
+		Morphia morphia = new Morphia();
+		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		
+		mongoClient.dropDatabase("prueba");
+
+        Datastore datastore = morphia.createDatastore(mongoClient, "prueba");
+        
 		createChallanges();
 		
 		Option o1 = new Option("Option1", true);
@@ -90,6 +102,10 @@ public class GenerateDB {
 		sections.add(s2);
 		sections.add(s3);
 		sections.add(s4);
+		
+		datastore.save(challanges);
+		datastore.save(sections);
+		datastore.save(user);
 	}
 
 	private void createChallanges() {

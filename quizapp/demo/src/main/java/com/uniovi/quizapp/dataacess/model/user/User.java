@@ -24,6 +24,11 @@ public class User extends DefaultEntity {
 		this.username = username;
 		this.password = password;
 	}
+	
+	public void sumExp(int exp) {
+		this.experience =+ exp;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
