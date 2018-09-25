@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.IChallangeDao;
+import com.uniovi.quizapp.dataacess.dao.api.ILevelDao;
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
 import com.uniovi.quizapp.dataacess.model.Challange;
+import com.uniovi.quizapp.dataacess.model.Level;
 import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
@@ -30,6 +32,8 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 	private ISectionDao sectionDao;
 	@Autowired
 	private IChallangeDao changeDao;
+	@Autowired
+	private ILevelDao levelDao;
 
 	private ResponseLevelDto response;
 
@@ -40,7 +44,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 
 		ResultSection resultSection = user.getResultSection(newResult.getCodSection());
 
-		checkNewResult(newResult, resultSection);
+		checkNewResult(newResult, resultSection, user);
 		checkSection(newResult, resultSection, user);
 		checkChallangesSection(resultSection);
 
@@ -89,7 +93,8 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 		}
 	}
 
-	private ResultSection checkNewResult(ResultLevelDto newResult, ResultSection resultSection) {
+	private ResultSection checkNewResult(ResultLevelDto newResult, ResultSection resultSection, User user) {
+		Level level = levelDao.findByField("codLevel", newResult.getCodLevel());
 		ResultLevel oldResult = resultSection.getResultLevels().get(newResult.getCodLevel());
 
 		oldResult.sumNumAttemps();
@@ -101,14 +106,26 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 			if (isComplete(newResult) && !oldResult.isComplete()) {
 				oldResult.setComplete(true);
 				for (String codLevelUnlock : newResult.getNextLevels()) {
-					ResultLevel level = resultSection.getResultLevels().get(codLevelUnlock);
-					level.setUnlocked(true);
-					response.addLevel(level);
+					ResultLevel rl = resultSection.getResultLevels().get(codLevelUnlock);
+					rl.setUnlocked(true);
+					response.addLevel(rl);
 				}
 			}
 		}
+		
+		int exp = getExpUser(level.getExperience(),
+				newResult.getNumCorrectQuestion(), 
+				newResult.getNumIncorrectQuestion(), 
+				oldResult.getNumAttemps());
+		
+		user.sumExp(exp);
 
 		return resultSection;
+	}
+	
+	private int getExpUser(int expBase, int correct, int incorrect, int numAttemps) {
+		int e = expBase * (correct - incorrect);
+		return e / (numAttemps ^ 3);
 	}
 
 	private boolean isComplete(ResultLevelDto newResult) {
