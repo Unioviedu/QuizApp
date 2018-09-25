@@ -18,6 +18,7 @@ public class Level {
 	private boolean isMain;
 	private boolean isFirst;
 	private String title;
+	private int experience;
 	
 	private List<String> nextLevels = new ArrayList<>();
 	
@@ -97,6 +98,14 @@ public class Level {
 
 	public void setCodSection(String codSection) {
 		this.codSection = codSection;
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 	
 	

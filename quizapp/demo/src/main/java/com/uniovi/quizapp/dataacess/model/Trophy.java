@@ -2,42 +2,28 @@ package com.uniovi.quizapp.dataacess.model;
 
 import org.mongodb.morphia.annotations.Entity;
 
-import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
-
 @Entity
-public class Challange extends DefaultEntity {
+public class Trophy {
 	
-	private int codChallange;
+	private String codTrophy;
 	private String description;
 	private int experience;
-
-	public Challange() {}
 	
-	public Challange(int codChallange, String description) {
-		super();
-		this.codChallange = codChallange;
-		this.description = description;
+	public String getCodTrophy() {
+		return codTrophy;
 	}
-
-	public int getCodChallange() {
-		return codChallange;
+	public void setCodTrophy(String codTrophy) {
+		this.codTrophy = codTrophy;
 	}
-
-	public void setCodChallange(int codChallange) {
-		this.codChallange = codChallange;
-	}
-	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public int getExperience() {
 		return experience;
 	}
-
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}

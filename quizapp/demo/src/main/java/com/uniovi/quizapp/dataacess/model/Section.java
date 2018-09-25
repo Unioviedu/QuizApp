@@ -14,6 +14,7 @@ public class Section extends DefaultEntity {
 	private String codSection;
 	private String title;
 	private String description;
+	private int experience;
 	
 	private List<String> nextSections = new ArrayList<>();
 	
@@ -82,6 +83,14 @@ public class Section extends DefaultEntity {
 	
 	public void addNextSection(Section section) {
 		this.nextSections.add(section.getCodSection());
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 	
 	

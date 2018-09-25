@@ -3,12 +3,18 @@ package com.uniovi.quizapp.dataacess.model.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
 public class User extends DefaultEntity {
 	
 	private String username;
 	private String password;
+	
+	private int experience;
+	private LevelRank levelRank;
+	
+	private Map<String, ResultTrophy> resultTrophies = new HashMap<>();
 	private Map<String, ResultSection> resultSections = new HashMap<>();
 	
 	public User() {}
@@ -48,6 +54,32 @@ public class User extends DefaultEntity {
 	public ResultLevel getResultLevel(String codSection, String codLevel) {
 		return resultSections.get(codSection).getResultLevels().get(codLevel);
 	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
+	public LevelRank getLevelRank() {
+		return levelRank;
+	}
+
+	public void setLevelRank(LevelRank levelRank) {
+		this.levelRank = levelRank;
+	}
+
+	public Map<String, ResultTrophy> getResultTrophies() {
+		return resultTrophies;
+	}
+
+	public void setResultTrophies(Map<String, ResultTrophy> resultTrophies) {
+		this.resultTrophies = resultTrophies;
+	}
+	
+	
 	
 	
 }
