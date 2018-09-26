@@ -30,7 +30,7 @@ public class SectionManagementImpl extends AbstractManagement implements ISectio
 	@Override
 	public List<ShortSectionDto> getSectionList(String username) {
 		List<Section> sections = sectionDao.findAll();
-		User user = userDao.findByField("username", username);
+		User user = userDao.findByUsername(username);
 		List<ShortSectionDto> sectionsDto = mapper.convertValue(sections, new TypeReference<List<ShortSectionDto>>() {
 		});
 
@@ -38,10 +38,10 @@ public class SectionManagementImpl extends AbstractManagement implements ISectio
 			try {
 			ResultSection result = user.getResultSections().get(dto.getCodSection());
 			dto.setUnlocked(result.isUnlocked());
-			dto.setComplete(result.isComplete());
+			dto.setCompleteAll(result.isCompleteAll());
 			} catch (Exception e) {
 				dto.setUnlocked(false);
-				dto.setComplete(false);
+				dto.setCompleteAll(false);
 			}
 		}
 
@@ -50,8 +50,8 @@ public class SectionManagementImpl extends AbstractManagement implements ISectio
 
 	@Override
 	public SectionDto getSectionByCod(String cod, String username) {
-		Section section = sectionDao.findByField("codSection", cod);
-		User user = userDao.findByField("username", username);
+		Section section = sectionDao.findByCod(cod);
+		User user = userDao.findByUsername(username);
 		SectionDto sectionDto = mapper.convertValue(section, SectionDto.class);
 		
 		ResultSection rs = user.getResultSections().get(section.getCodSection());

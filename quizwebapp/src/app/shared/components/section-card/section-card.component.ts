@@ -34,7 +34,7 @@ export class SectionCardComponent implements OnInit {
         this.msgBadge = "Lock";
         this.opacity = 0.5;
         this.disabledButton = true;
-    } else if (this.section.complete) {
+    } else if (this.section.completeAll) {
         this.classBadge = this.NAME_BADGE+"success";
         this.msgBadge = "Complete"
     }

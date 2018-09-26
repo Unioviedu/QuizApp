@@ -5,6 +5,7 @@ import com.uniovi.quizapp.dataacess.model.Level;
 public class ResultLevel {
 	
 	private String codLevel;
+	private String name;
 	private boolean isUnlocked;
 	private boolean isComplete;
 	private boolean isMain;
@@ -21,6 +22,7 @@ public class ResultLevel {
 		this.isMain = level.isMain();
 		this.experience = level.getExperience();
 		this.isUnlocked = level.isFirst();
+		this.name = level.getName();
 	}
 
 
@@ -95,6 +97,16 @@ public class ResultLevel {
 
 	public void setExperience(int experience) {
 		this.experience = experience;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

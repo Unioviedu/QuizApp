@@ -23,7 +23,10 @@ export class SectionComponent implements OnInit {
   levelsOptional: Level[];
   challanges: Challange[];
 
-  newLevels: any[];
+  levelsUnlock: string[] = [];
+  sectionsUnlock: string[] = [];
+  challangesComplete: string[] = [];
+  newExp: number;
 
   constructor(private activatedRoute: ActivatedRoute,
     private sectionsService: SectionsService) {
@@ -38,7 +41,11 @@ export class SectionComponent implements OnInit {
     let newInfo = this.sectionsService.newInfo;
 
     if (newInfo) {
-      this.newLevels = newInfo;
+      this.levelsUnlock = newInfo.levelsUnlock;
+      this.sectionsUnlock = newInfo.sectionsUnlock;
+      this.challangesComplete = newInfo.challangesComplete;
+      this.newExp = newInfo.newExp;
+
       jQuery(this.myModal.nativeElement).modal('show');
       this.sectionsService.changeInfo(null);
     }
@@ -57,7 +64,15 @@ export class SectionComponent implements OnInit {
   }
 
   getChallangeDescription(i: number) {
-    return this.challanges[i].description + " " + this.challanges[i].complete;
+    return this.challanges[i].description;
+  }
+
+  getClass(i: number) {
+    const base = 'list-group-item';
+    
+    return this.challanges[i].complete ? 
+      base+' list-group-item-success' :
+      base;
   }
 
 }

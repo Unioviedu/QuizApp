@@ -17,6 +17,7 @@ public class ResultSection {
 	private String codSection;
 	private boolean isUnlocked;
 	private boolean isComplete;
+	private boolean isCompleteAll;
 	
 	private Map<String, ResultLevel> resultLevels = new HashMap<>();
 	private Set<ResultChallange> resultChallanges = new HashSet<>();
@@ -94,6 +95,14 @@ public class ResultSection {
 
 	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
+	}
+
+	public boolean isCompleteAll() {
+		return isCompleteAll;
+	}
+
+	public void setCompleteAll(boolean isCompleteAll) {
+		this.isCompleteAll = isCompleteAll;
 	}
 	
 	

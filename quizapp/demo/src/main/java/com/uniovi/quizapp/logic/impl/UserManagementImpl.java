@@ -17,7 +17,7 @@ public class UserManagementImpl extends AbstractManagement implements IUserManag
 
 	@Override
 	public UserDto getUser(String username) {
-		User user = userDao.findByField("username", username);
+		User user = userDao.findByUsername(username);
 		UserDto userDto = mapper.convertValue(user, UserDto.class);
 
 		return userDto;

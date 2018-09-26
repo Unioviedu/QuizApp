@@ -13,7 +13,7 @@ public class ShortSectionDto {
 	private String title;
 	private String description;
 	private boolean isUnlocked;
-	private boolean isComplete;
+	private boolean isCompleteAll;
 	private List<String> nextSections = new ArrayList<>();
 	
 	public String getTitle() {
@@ -46,11 +46,11 @@ public class ShortSectionDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isComplete() {
-		return isComplete;
+	public boolean isCompleteAll() {
+		return isCompleteAll;
 	}
-	public void setComplete(boolean isComplete) {
-		this.isComplete = isComplete;
+	public void setCompleteAll(boolean isCompleteAll) {
+		this.isCompleteAll = isCompleteAll;
 	}
 	public List<String> getNextSections() {
 		return nextSections;

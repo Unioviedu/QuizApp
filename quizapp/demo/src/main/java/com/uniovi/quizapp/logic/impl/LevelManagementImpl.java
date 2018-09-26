@@ -36,7 +36,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 	@Override
 	public ResponseLevelDto responseLevel(ResultLevelDto newResult) {
 		response = new ResponseLevelDto();
-		User user = userDao.findByField("username", newResult.getUsername());
+		User user = userDao.findByUsername(newResult.getUsername());
 
 		ResultSection resultSection = user.getResultSection(newResult.getCodSection());
 
@@ -51,8 +51,13 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 
 	private void checkChallangesSection(ResultSection resultSection) {
 		for (ResultChallange challange : resultSection.getResultChallanges()) {
-			boolean isComplete = new ChallangeFunction().checkChallange(challange.getCodChallange(), resultSection);
-			challange.setComplete(isComplete);
+			if (!challange.isComplete()) {
+				boolean isComplete = new ChallangeFunction().checkChallange(challange.getCodChallange(), resultSection);
+				challange.setComplete(isComplete);
+				
+				if (isComplete)
+					response.addChallange(challange.getDescription());
+			}
 		}
 	}
 
@@ -73,11 +78,12 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 		if (isComplete && !isCompleteBefore)
 			unlockedNextSections(newResult, user);
 
-		resultSection.setComplete(isCompleteAll);
+		resultSection.setComplete(isComplete);
+		resultSection.setCompleteAll(isCompleteAll);
 	}
 
 	private void unlockedNextSections(ResultLevelDto newResult, User user) {
-		Section sectionCurrent = sectionDao.findByField("codSection", newResult.getCodSection());
+		Section sectionCurrent = sectionDao.findByCod(newResult.getCodSection());
 
 		for (String codSectionUnlock : sectionCurrent.getNextSections()) {
 			Section section = sectionDao.findByField("codSection", codSectionUnlock);
@@ -85,7 +91,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 			ResultSection rs = new ResultSection(section, challanges);
 			rs.setUnlocked(true);
 			user.addResultSection(rs);
-			response.addSection(rs);
+			response.addSection(section.getTitle());
 		}
 	}
 
@@ -103,7 +109,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 				for (String codLevelUnlock : newResult.getNextLevels()) {
 					ResultLevel rl = resultSection.getResultLevels().get(codLevelUnlock);
 					rl.setUnlocked(true);
-					response.addLevel(rl);
+					response.addLevel(rl.getName());
 				}
 			}
 		}
@@ -114,6 +120,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 				oldResult.getNumAttemps());
 		
 		user.sumExp(exp);
+		response.addExp(exp);
 
 		return resultSection;
 	}

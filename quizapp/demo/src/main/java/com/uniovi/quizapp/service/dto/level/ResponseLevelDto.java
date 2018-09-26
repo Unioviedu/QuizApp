@@ -3,36 +3,54 @@ package com.uniovi.quizapp.service.dto.level;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
-import com.uniovi.quizapp.dataacess.model.user.ResultSection;
-
 public class ResponseLevelDto {
 	
-	private List<ResultLevel> levelsUnlock = new ArrayList<>();
-	private List<ResultSection> sectionsUnlock = new ArrayList<>();
+	private List<String> levelsUnlock = new ArrayList<>();
+	private List<String> sectionsUnlock = new ArrayList<>();
+	private List<String> challangesComplete = new ArrayList<>();
+	private int newExp;
 	
-	public List<ResultLevel> getLevelsUnlock() {
+	public List<String> getLevelsUnlock() {
 		return levelsUnlock;
 	}
-
-	public void setLevelsUnlock(List<ResultLevel> levelsUnlock) {
+	public void setLevelsUnlock(List<String> levelsUnlock) {
 		this.levelsUnlock = levelsUnlock;
 	}
-
-	public void addLevel(ResultLevel level) {
-		levelsUnlock.add(level);
-	}
-
-	public List<ResultSection> getSectionsUnlock() {
+	public List<String> getSectionsUnlock() {
 		return sectionsUnlock;
 	}
-
-	public void setSectionsUnlock(List<ResultSection> sectionsUnlock) {
+	public void setSectionsUnlock(List<String> sectionsUnlock) {
 		this.sectionsUnlock = sectionsUnlock;
 	}
-	
-	public void addSection(ResultSection rs) {
-		sectionsUnlock.add(rs);
+	public int getNewExp() {
+		return newExp;
 	}
+	public void setNewExp(int newExp) {
+		this.newExp = newExp;
+	}
+	public List<String> getChallangesComplete() {
+		return challangesComplete;
+	}
+	public void setChallangesComplete(List<String> challangesComplete) {
+		this.challangesComplete = challangesComplete;
+	}
+	
+	public void addLevel(String levelTitle) {
+		levelsUnlock.add(levelTitle);
+	}
+	
+	public void addSection(String sectionTitle) {
+		sectionsUnlock.add(sectionTitle);
+	}
+	
+	public void addExp(int exp) {
+		this.newExp = this.newExp + exp;
+	}
+	
+	public void addChallange(String challangeDescription) {
+		challangesComplete.add(challangeDescription);
+	}
+	
+	
 
 }
