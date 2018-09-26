@@ -1,11 +1,14 @@
 package com.uniovi.quizapp.dataacess.model.user;
 
+import com.uniovi.quizapp.dataacess.model.Level;
+
 public class ResultLevel {
 	
 	private String codLevel;
 	private boolean isUnlocked;
 	private boolean isComplete;
 	private boolean isMain;
+	private int experience;
 	private int numAttemps;
 	private int numCorrectQuestion;
 	private int numIncorrectQuestion;
@@ -13,11 +16,11 @@ public class ResultLevel {
 	public ResultLevel() {}
 	
 	
-	public ResultLevel(String codLevel, boolean isComplete, boolean isMain, int numAttemps) {
-		this.codLevel = codLevel;
-		this.isComplete = isComplete;
-		this.setMain(isMain);
-		this.numAttemps = numAttemps;
+	public ResultLevel(Level level) {
+		this.codLevel = level.getCodLevel();
+		this.isMain = level.isMain();
+		this.experience = level.getExperience();
+		this.isUnlocked = level.isFirst();
 	}
 
 
@@ -82,6 +85,16 @@ public class ResultLevel {
 
 	public void setMain(boolean isMain) {
 		this.isMain = isMain;
+	}
+
+
+	public int getExperience() {
+		return experience;
+	}
+
+
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 	
 	

@@ -19,6 +19,7 @@ public class LevelDto {
 	private int numAttemps;
 	private int numCorrectQuestion;
 	private int numIncorrectQuestion;
+	private int experience;
 	
 	private List<String> nextLevels = new ArrayList<>();
 	private Set<Question> questions = new HashSet<>();
@@ -89,6 +90,12 @@ public class LevelDto {
 	}
 	public void setCodSection(String codSection) {
 		this.codSection = codSection;
+	}
+	public int getExperience() {
+		return experience;
+	}
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 	
 	

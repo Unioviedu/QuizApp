@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.IChallangeDao;
-import com.uniovi.quizapp.dataacess.dao.api.ILevelDao;
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
 import com.uniovi.quizapp.dataacess.model.Challange;
-import com.uniovi.quizapp.dataacess.model.Level;
 import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
@@ -32,8 +30,6 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 	private ISectionDao sectionDao;
 	@Autowired
 	private IChallangeDao changeDao;
-	@Autowired
-	private ILevelDao levelDao;
 
 	private ResponseLevelDto response;
 
@@ -94,7 +90,6 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 	}
 
 	private ResultSection checkNewResult(ResultLevelDto newResult, ResultSection resultSection, User user) {
-		Level level = levelDao.findByField("codLevel", newResult.getCodLevel());
 		ResultLevel oldResult = resultSection.getResultLevels().get(newResult.getCodLevel());
 
 		oldResult.sumNumAttemps();
@@ -113,7 +108,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 			}
 		}
 		
-		int exp = getExpUser(level.getExperience(),
+		int exp = getExpUser(oldResult.getExperience(),
 				newResult.getNumCorrectQuestion(), 
 				newResult.getNumIncorrectQuestion(), 
 				oldResult.getNumAttemps());
@@ -125,7 +120,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 	
 	private int getExpUser(int expBase, int correct, int incorrect, int numAttemps) {
 		int e = expBase * (correct - incorrect);
-		return e / (numAttemps ^ 3);
+		return (int) (e / Math.pow(numAttemps, 2));
 	}
 
 	private boolean isComplete(ResultLevelDto newResult) {

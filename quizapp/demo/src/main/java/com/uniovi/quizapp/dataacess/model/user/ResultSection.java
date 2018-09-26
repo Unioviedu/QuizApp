@@ -45,12 +45,9 @@ public class ResultSection {
 
 	private void createLevels(Section section) {
 		for (Level level: section.getLevels()) {
-			ResultLevel rl = new ResultLevel();
-			rl.setCodLevel(level.getCodLevel());
-			rl.setMain(level.isMain());
-			rl.setUnlocked(level.isFirst());
+			ResultLevel rl = new ResultLevel(level);
 			
-			resultLevels.put(level.getCodLevel(), rl);
+			resultLevels.put(rl.getCodLevel(), rl);
 		}
 	}
 	

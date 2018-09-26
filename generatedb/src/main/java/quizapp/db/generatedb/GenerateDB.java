@@ -51,11 +51,11 @@ public class GenerateDB {
 		question3.setCodeBlocksOptions(new String [] { "<h1>", "<h2>", "<p>", "</h1>" });
 		question3.setCodeBlocksCorrect(new String[] { "<h1>", "</h1>" });
 		
-		Level l11 = new Level("1_1", true, "Level 1");
+		Level l11 = new Level("1_1", true, "Level 1", 100);
 		l11.addQuestions(question1, question2);
-		Level l12 = new Level("1_2", true, "Level 2");
+		Level l12 = new Level("1_2", true, "Level 2", 200);
 		l12.addQuestions(question1, question3);
-		Level l13 = new Level("1_3", false, "Level 3");
+		Level l13 = new Level("1_3", false, "Level 3", 150);
 		l13.addQuestions(question1);
 		
 		l11.addNextLevels(l12, l13);
@@ -63,25 +63,25 @@ public class GenerateDB {
 		Section s1 = new Section("1", "Introducción", "Esta es una sección de introducción");
 		s1.addLevels(l11, l12, l13);
 		
-		Level l21 = new Level("2_1", true, "Level 1");
-		Level l22 = new Level("2_2", true, "Level 2");
-		Level l23 = new Level("2_3", false, "Level 3");
+		Level l21 = new Level("2_1", true, "Level 1", 100);
+		Level l22 = new Level("2_2", true, "Level 2", 200);
+		Level l23 = new Level("2_3", false, "Level 3", 150);
 		
 		Section s2 = new Section("2", "Principios básicos", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
 		s2.addLevels(l21, l22, l23);
 		s1.addNextSection(s2);
 		
-		Level l31 = new Level("3_1", true, "Level 1");
-		Level l32 = new Level("3_2", true, "Level 2");
-		Level l33 = new Level("3_3", true, "Level 3");
-		Level l34 = new Level("3_4", true, "Level 4");
-		Level l35 = new Level("3_5", false, "Level 5");
-		Level l36 = new Level("3_6", false, "Level 6");
+		Level l31 = new Level("3_1", true, "Level 1", 100);
+		Level l32 = new Level("3_2", true, "Level 2", 100);
+		Level l33 = new Level("3_3", true, "Level 3", 100);
+		Level l34 = new Level("3_4", true, "Level 4", 100);
+		Level l35 = new Level("3_5", false, "Level 5", 100);
+		Level l36 = new Level("3_6", false, "Level 6", 100);
 		
 		Section s3 = new Section("3", "Principios intermedios", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
 		s3.addLevels(l31, l32, l33, l34, l35, l36);
 		
-		Level l41 = new Level("4_1", true, "Level 1");
+		Level l41 = new Level("4_1", true, "Level 1", 170);
 		
 		Section s4 = new Section("4", "Principios avanzados", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
 		s4.addLevels(l41);

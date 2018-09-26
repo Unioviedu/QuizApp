@@ -26,7 +26,7 @@ public class User extends DefaultEntity {
 	}
 	
 	public void sumExp(int exp) {
-		this.experience =+ exp;
+		this.experience = this.experience + exp;
 	}
 	
 	public String getUsername() {

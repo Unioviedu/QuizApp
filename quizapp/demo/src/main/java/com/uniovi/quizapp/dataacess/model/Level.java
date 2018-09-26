@@ -28,11 +28,12 @@ public class Level extends DefaultEntity {
 	
 	public Level() {}
 	
-	public Level(String codLevel, boolean isMain, String title) {
+	public Level(String codLevel, boolean isMain, String title, int experience) {
 		super();
 		this.codLevel = codLevel;
 		this.isMain = isMain;
 		this.title = title;
+		this.experience = experience;
 	}
 
 	public String getName() {
