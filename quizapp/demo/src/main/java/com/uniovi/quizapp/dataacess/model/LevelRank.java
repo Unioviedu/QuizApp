@@ -2,8 +2,10 @@ package com.uniovi.quizapp.dataacess.model;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
+
 @Entity
-public class LevelRank {
+public class LevelRank extends DefaultEntity{
 	
 	private String name;
 	private int experience;

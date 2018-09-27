@@ -7,6 +7,7 @@ public class UserDto {
 	private String id;
 	private String username;
 	private String password;
+	private int experience;
 	
 	public String getUsername() {
 		return username;
@@ -25,6 +26,12 @@ public class UserDto {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getExperience() {
+		return experience;
+	}
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 
 }
