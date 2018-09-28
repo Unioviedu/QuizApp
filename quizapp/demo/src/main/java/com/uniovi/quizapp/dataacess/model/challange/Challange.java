@@ -1,15 +1,16 @@
-package com.uniovi.quizapp.dataacess.model;
+package com.uniovi.quizapp.dataacess.model.challange;
 
 import org.mongodb.morphia.annotations.Entity;
 
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
-@Entity
-public class Challange extends DefaultEntity {
+@Entity("Challange")
+public abstract class Challange extends DefaultEntity {
 	
 	private int codChallange;
 	private String description;
 	private int experience;
+	protected ChallangeType challageType;
 
 	public Challange() {}
 	
@@ -41,6 +42,16 @@ public class Challange extends DefaultEntity {
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
+
+	public ChallangeType getChallangeType() {
+		return challageType;
+	}
+
+	public void setChallangeType(ChallangeType type) {
+		this.challageType = type;
+	}
+	
+	
 	
 	
 

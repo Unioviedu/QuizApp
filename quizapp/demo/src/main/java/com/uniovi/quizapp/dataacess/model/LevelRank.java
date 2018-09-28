@@ -10,6 +10,16 @@ public class LevelRank extends DefaultEntity{
 	private String name;
 	private int experience;
 	
+	public LevelRank() {}
+	
+	public LevelRank(String name, int experience) {
+		super();
+		this.name = name;
+		this.experience = experience;
+	}
+
+
+
 	public int getExperience() {
 		return experience;
 	}

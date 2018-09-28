@@ -4,14 +4,15 @@ import org.mongodb.morphia.annotations.Entity;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property ="className", include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
-	@JsonSubTypes.Type(value = QuestionOptions.class, name = "com.prueba.demo.dataacess.model.question.QuestionOptions"),
-	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "com.prueba.demo.dataacess.model.question.QuestionCodeBlock")
+	@JsonSubTypes.Type(value = QuestionOptions.class, name = "com.uniovi.quizapp.dataacess.model.question.QuestionOptions"),
+	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock")
 })
 @Entity
-public abstract class Question {
+public abstract class Question extends DefaultEntity {
 	private String title;
 	private String type;
 	private String statement;

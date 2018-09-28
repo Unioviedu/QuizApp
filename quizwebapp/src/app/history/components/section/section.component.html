@@ -1,83 +1,82 @@
 <div class="jumbotron">
-  <h1 class="display-6">{{titleSection}}</h1>
-  <hr class="my-4">
-  <p class="lead">Antes de comenzar a jugar, lee la documentación de la sección!</p>
-  <button class="btn btn-primary btn-lg" type="button" style="margin: 4px">Learn more</button>
-  <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample"
-    aria-expanded="false" aria-controls="collapseExample">
+    <h1 class="display-6">{{section.title}}</h1>
+    <hr class="my-4">
+    <p class="lead">Antes de comenzar a jugar, lee la documentación de la sección!</p>
+    <button class="btn btn-primary btn-lg" type="button" style="margin: 4px">Learn more</button>
+    <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     Challanges
   </button>
 
-  <div class="collapse" id="collapseExample">
-    <div class="card" style="margin-top: 4px">
-      <ul class="list-group list-group-flush">
-        <li [class]="getClass(i)" *ngFor="let challange of challanges; let i = index;">
-          {{ getChallangeDescription(i)}}
-        </li>
-      </ul>
+    <div class="collapse" id="collapseExample">
+        <div class="card" style="margin-top: 4px">
+            <ul class="list-group list-group-flush">
+                <li [class]="getClass(i)" *ngFor="let challange of section.challanges; let i = index;">
+                    {{ getChallangeDescription(i)}}
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="row">
 
-  <div class="col-lg">
-    <h2>Main Levels</h2>
-    <hr>
+    <div class="col-lg">
+        <h2>Main Levels</h2>
+        <hr>
 
-    <app-level-card [level]="level" *ngFor="let level of levelsMain"></app-level-card>
-  </div>
+        <app-level-card [level]="level" *ngFor="let level of levelsMain"></app-level-card>
+    </div>
 
-  <div class="col-lg">
-    <h2>Optional Levels</h2>
-    <hr>
+    <div class="col-lg">
+        <h2>Optional Levels</h2>
+        <hr>
 
-    <app-level-card [level]="level" *ngFor="let level of levelsOptional"></app-level-card>
-  </div>
+        <app-level-card [level]="level" *ngFor="let level of levelsOptional"></app-level-card>
+    </div>
 
 
 </div>
 
 <div #myModal class="modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
+            </div>
+            <div class="modal-body">
 
-        <div *ngIf="levelsUnlock.length > 0" class="alert alert-warning">
-          <h6>Levels unlocked</h6>
-          <ul>
-            <li *ngFor="let level of levelsUnlock">{{level}}</li>
-          </ul>
+                <div *ngIf="levelsUnlock.length > 0" class="alert alert-warning">
+                    <h6>Levels unlocked</h6>
+                    <ul>
+                        <li *ngFor="let level of newInfo.levelsUnlock">{{level}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="sectionsUnlock.length > 0" class="alert alert-warning">
+                    <h6>Sections unlocked</h6>
+                    <ul>
+                        <li *ngFor="let section of newInfo.sectionsUnlock">{{section}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="challangesComplete.length > 0" class="alert alert-secondary">
+                    <h6>Challange complete</h6>
+                    <ul>
+                        <li *ngFor="let challange of newInfo.challangesComplete">{{challange}}</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-success">
+                    <h6>Bonification:</h6> {{newInfo.newExp}} exp
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-
-        <div *ngIf="sectionsUnlock.length > 0" class="alert alert-warning">
-          <h6>Sections unlocked</h6>
-          <ul>
-            <li *ngFor="let section of sectionsUnlock">{{section}}</li>
-          </ul>
-        </div>
-
-        <div *ngIf="challangesComplete.length > 0" class="alert alert-secondary">
-          <h6>Challange complete</h6>
-          <ul>
-            <li *ngFor="let challange of challangesComplete">{{challange}}</li>
-          </ul>
-        </div>
-
-        <div class="alert alert-success">
-           <h6>Bonification:</h6> {{newExp}} exp
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
     </div>
-  </div>
 </div>

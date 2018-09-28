@@ -1,6 +1,7 @@
 package com.uniovi.quizapp.dataacess.model.user;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import com.uniovi.quizapp.dataacess.model.Challange;
 import com.uniovi.quizapp.dataacess.model.Level;
 import com.uniovi.quizapp.dataacess.model.Section;
+import com.uniovi.quizapp.dataacess.model.challange.Challange;
 
 public class ResultSection {
 	
@@ -34,11 +35,18 @@ public class ResultSection {
 	private void createChallanges(List<Challange> challanges) {
 		Random r = new Random();
 		int numberChallanges = r.nextInt(4)+1;
+		List<Integer> challangesAdd = new ArrayList<>();
 		
 		for (int i = 0; i < numberChallanges; i++) {
 			int newChallange = r.nextInt(challanges.size());
+			
+			while (challangesAdd.contains(newChallange)) {
+				newChallange = r.nextInt(challanges.size());
+			}
+			
 			ResultChallange rc = new ResultChallange(challanges.get(newChallange));
 			
+			challangesAdd.add(newChallange);
 			resultChallanges.add(rc);
 		}
 		

@@ -1,6 +1,7 @@
 package com.uniovi.quizapp.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.uniovi.quizapp.dataacess.model.LevelRank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
@@ -8,6 +9,7 @@ public class UserDto {
 	private String username;
 	private String password;
 	private int experience;
+	private LevelRank levelRank;
 	
 	public String getUsername() {
 		return username;
@@ -32,6 +34,12 @@ public class UserDto {
 	}
 	public void setExperience(int experience) {
 		this.experience = experience;
+	}
+	public LevelRank getLevelRank() {
+		return levelRank;
+	}
+	public void setLevelRank(LevelRank levelRank) {
+		this.levelRank = levelRank;
 	}
 
 }

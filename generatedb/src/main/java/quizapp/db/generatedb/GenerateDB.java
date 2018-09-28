@@ -7,9 +7,12 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
-import com.uniovi.quizapp.dataacess.model.Challange;
 import com.uniovi.quizapp.dataacess.model.Level;
+import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.Section;
+import com.uniovi.quizapp.dataacess.model.challange.Challange;
+import com.uniovi.quizapp.dataacess.model.challange.ChallangeSection;
+import com.uniovi.quizapp.dataacess.model.challange.ChallangeTrophy;
 import com.uniovi.quizapp.dataacess.model.question.Option;
 import com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock;
 import com.uniovi.quizapp.dataacess.model.question.QuestionOptions;
@@ -17,10 +20,12 @@ import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultSection;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
+import com.uniovi.quizapp.logic.general.TrophyFunction;
 
 public class GenerateDB {
 	
 	List<Challange> challanges = new ArrayList<>();
+	List<LevelRank> levelsRank = new ArrayList<>();
 	List<Section> sections = new ArrayList<>();
 	User user;
 	
@@ -33,6 +38,7 @@ public class GenerateDB {
         Datastore datastore = morphia.createDatastore(mongoClient, "prueba");
         
 		createChallanges();
+		createLevelRanks();
 		
 		Option o1 = new Option("Option1", true);
 		Option o2 = new Option("Option2", false);
@@ -89,11 +95,6 @@ public class GenerateDB {
 		ResultSection rs1 = new ResultSection(s1, challanges);
 		rs1.setUnlocked(true);
 		
-		ResultChallange rc = new ResultChallange();
-		rc.setCodChallange(ChallangeFunction.ALL_LEVELS_ALL_CORRECT);
-		rc.setDescription("Complete all levels with all questions correct");
-		rs1.addChallanges(rc);
-		
 		User user = new User("edu", "edu");
 		user.addResultSection(rs1);
 		
@@ -103,19 +104,52 @@ public class GenerateDB {
 		sections.add(s3);
 		sections.add(s4);
 		
+		createTrophies();
+		
 		datastore.save(challanges);
+		datastore.save(levelsRank);
 		datastore.save(sections);
 		datastore.save(user);
 	}
 
+	private void createLevelRanks() {
+		LevelRank lr1 = new LevelRank("Noob", 0);
+		LevelRank lr2 = new LevelRank("Intermediate", 100);
+		LevelRank lr3 = new LevelRank("Pro", 300);
+		
+		levelsRank.add(lr1);
+		levelsRank.add(lr2);
+		levelsRank.add(lr3);
+	
+	}
+
 	private void createChallanges() {
-		Challange c1 = new Challange(ChallangeFunction.ALL_CORRECT_TO_FIRST, "Completa un nivel sin fallos a la primera");
-		Challange c2 = new Challange(ChallangeFunction.ALL_LEVELS_ALL_CORRECT, "Completa todos los niveles sin ningun fallo");
-		Challange c3 = new Challange(ChallangeFunction.ALL_LEVELS_UNLOCK, "Desbloquea todos los niveles");
+		
+		Challange c1 = new ChallangeSection(
+				ChallangeFunction.ALL_CORRECT_TO_FIRST, 
+				"Completa un nivel sin fallos a la primera");
+		Challange c2 = new ChallangeSection(
+				ChallangeFunction.ALL_LEVELS_ALL_CORRECT, 
+				"Completa todos los niveles sin ningun fallo");
+		Challange c3 = new ChallangeSection(
+				ChallangeFunction.ALL_LEVELS_UNLOCK, 
+				"Desbloquea todos los niveles");
 		
 		challanges.add(c1);
 		challanges.add(c2);
 		challanges.add(c3);
+	}
+	
+	private void createTrophies() {
+		
+		Challange c1 = new ChallangeTrophy(
+				TrophyFunction.FIRST_SECTION_COMPLETE, 
+				"Completa tu primera sección del modo historia",
+				"Un pequeño paso...");
+		
+		ResultChallange rc = new ResultChallange(c1);
+		
+		user.addResultTrophy(rc);
 	}
 
 }

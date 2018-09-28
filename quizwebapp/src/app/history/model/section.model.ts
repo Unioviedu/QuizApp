@@ -7,8 +7,8 @@ export class Section {
     title: string;
     description: string;
     unlocked: boolean;
-    completeAll:boolean;
+    completeAll: boolean;
     levels: Level[];
     nextSections: String[];
-    challanges:Challange[];
+    challanges: Challange[];
 }

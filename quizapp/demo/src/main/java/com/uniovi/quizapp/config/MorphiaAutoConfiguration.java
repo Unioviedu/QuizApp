@@ -17,8 +17,9 @@ public class MorphiaAutoConfiguration {
     @Bean
     public Datastore datastore() {
         Morphia morphia = new Morphia();
-        morphia.mapPackage("com.prueba.demo.model");
-        morphia.mapPackage("com.prueba.demo.model.question");
+        morphia.mapPackage("com.uniovi.quizapp.dataacess.model");
+        morphia.mapPackage("com.uniovi.quizapp.dataacess.model.question");
+        morphia.mapPackage("com.uniovi.quizapp.dataacess.model.challange");
 
         return morphia.createDatastore(mongoClient, "prueba"); // "dataStoreInstanceId" may come from properties?
     }

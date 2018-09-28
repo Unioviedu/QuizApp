@@ -1,43 +1,55 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-transparent">
-  <div class="col-md-6 p-lg-2 mx-auto my-1">
-    <img src="assets/descarga.jpg" class="rounded-circle" alt="Cinque Terre" width="152" height="118">
-    <h1 class="display-4 font-weight-normal">@{{user.username}}</h1>
-    <hr>
-    <p class="lead font-weight-normal"><strong>Name: </strong>Edu Martinez</p>
-    <p class="lead font-weight-normal"><strong>Mail: </strong>edumac710@gmail.com</p>
-    <a class="btn btn-outline-secondary" href="#" style="margin: 5px">Edit profile</a>
-    <a class="btn btn-danger" href="#" style="margin: 5px">Close session</a>
-  </div>
+    <div class="col-md-6 p-lg-2 mx-auto my-1">
+        <img src="assets/descarga.jpg" class="rounded-circle" alt="Cinque Terre" width="152" height="118">
+        <h1 class="display-4 font-weight-normal">@{{user.username}}</h1>
+        <hr>
+        <p class="lead font-weight-normal"><strong>Name: </strong>Edu Martinez</p>
+        <p class="lead font-weight-normal"><strong>Mail: </strong>edumac710@gmail.com</p>
+        <a class="btn btn-outline-secondary" href="#" style="margin: 5px">Edit profile</a>
+        <a class="btn btn-danger" href="#" style="margin: 5px">Close session</a>
+    </div>
 </div>
 
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+<div class="card-columns">
 
-  <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden" style="width: 100%">
-    <div class="my-3 py-3">
-      <h2 class="display-5">Experience</h2>
+    <div class="card text-center text-white bg-dark mb-3" style="width: 100%">
+        <div class="card-header">
+            <h2 class="display-5">Level Rank</h2>
+        </div>
+        <div class="card-body">
+            <img src="assets/noob.svg" class="rounded-circle" alt="Cinque Terre" width="304" height="226">
+            <h2 class="display-3">{{levelRank.name}}</h2>
+            <hr>
+            <h1 class="display-2">{{user.experience}} exp</h1>
+        </div>
     </div>
-    <img src="assets/noob.jpg" class="rounded-circle" alt="Cinque Terre" width="304" height="226">
-    <h2 class="display-3">Noob</h2>
-    <hr>
-    <h1 class="display-2">{{user.experience}} exp</h1>
-  </div>
 
-  <div class="bg-warning mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden" style="width: 100%">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Trophies</h2>
+    <div class="card text-center text-white bg-warning mb-3" style="width: 100%">
+        <div class="card-header">
+            <h2 class="display-5">Trophies</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group text-dark text-left" style="margin-bottom: 15px">
+                <li class="list-group-item list-group-item-light">
+                    <div class="row">
+                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
+                        <div class="col">
+                            <h4>Un pequeño paso...</h4>
+                            Completa la primera sección del modo historia
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-light">Dapibus ac facilisis in</li>
+                <li class="list-group-item list-group-item-light">Morbi leo risus</li>
+                <li class="list-group-item list-group-item-light">Porta ac consectetur ac</li>
+                <li class="list-group-item list-group-item-light">Vestibulum at eros</li>
+                <li class="list-group-item list-group-item-light">Cras justo odio</li>
+                <li class="list-group-item list-group-item-light">Dapibus ac facilisis in</li>
+                <li class="list-group-item list-group-item-light">Morbi leo risus</li>
+                <li class="list-group-item list-group-item-light">Porta ac consectetur ac</li>
+                <li class="list-group-item list-group-item-light">Vestibulum at eros</li>
+            </ul>
+        </div>
     </div>
-    <ul class="list-group text-dark" style="margin-bottom: 15px">
-      <li class="list-group-item list-group-item-light">Cras justo odio</li>
-      <li class="list-group-item list-group-item-light">Dapibus ac facilisis in</li>
-      <li class="list-group-item list-group-item-light">Morbi leo risus</li>
-      <li class="list-group-item list-group-item-light">Porta ac consectetur ac</li>
-      <li class="list-group-item list-group-item-light">Vestibulum at eros</li>
-      <li class="list-group-item list-group-item-light">Cras justo odio</li>
-      <li class="list-group-item list-group-item-light">Dapibus ac facilisis in</li>
-      <li class="list-group-item list-group-item-light">Morbi leo risus</li>
-      <li class="list-group-item list-group-item-light">Porta ac consectetur ac</li>
-      <li class="list-group-item list-group-item-light">Vestibulum at eros</li>
-    </ul>
-  </div>
 
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +7,8 @@ import { UserService } from '../../services/user.service'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:any;
+  user: any = {};
+  levelRank: any = {};
 
   constructor(private userService: UserService) { }
 
@@ -17,7 +18,10 @@ export class ProfileComponent implements OnInit {
 
   loadProfile() {
     this.userService.getUser().subscribe(
-      data => this.user = data
+      data => {
+        this.user = data;
+        this.levelRank = data.levelRank;
+      }
     );
   }
 

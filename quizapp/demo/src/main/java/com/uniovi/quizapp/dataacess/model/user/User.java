@@ -14,7 +14,7 @@ public class User extends DefaultEntity {
 	private int experience;
 	private LevelRank levelRank;
 	
-	private Map<String, ResultTrophy> resultTrophies = new HashMap<>();
+	private Map<Integer, ResultChallange> resultTrophies = new HashMap<>();
 	private Map<String, ResultSection> resultSections = new HashMap<>();
 	
 	public User() {}
@@ -76,15 +76,17 @@ public class User extends DefaultEntity {
 		this.levelRank = levelRank;
 	}
 
-	public Map<String, ResultTrophy> getResultTrophies() {
+	public Map<Integer, ResultChallange> getResultTrophies() {
 		return resultTrophies;
 	}
 
-	public void setResultTrophies(Map<String, ResultTrophy> resultTrophies) {
+	public void setResultTrophies(Map<Integer, ResultChallange> resultTrophies) {
 		this.resultTrophies = resultTrophies;
+	}	
+	
+	public void addResultTrophy(ResultChallange rt) {
+		this.resultTrophies.put(rt.getChallange().getCodChallange(), rt);
 	}
-	
-	
 	
 	
 }

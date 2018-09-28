@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SectionsService } from '../../services/sections.service'
+import { SectionsService } from '../../services/sections.service';
 import { Section } from '../../model/section.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Section } from '../../model/section.model';
   styleUrls: ['./sections.component.css']
 })
 export class SectionsComponent implements OnInit {
-  sections:Section[];
+  sections: Section[];
 
   constructor(private sectionsService: SectionsService) { }
 
