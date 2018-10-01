@@ -1,7 +1,11 @@
 package com.uniovi.quizapp.service.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uniovi.quizapp.dataacess.model.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
@@ -10,6 +14,8 @@ public class UserDto {
 	private String password;
 	private int experience;
 	private LevelRank levelRank;
+	
+	private Set<ResultChallange> resultTrophies = new HashSet<>();
 	
 	public String getUsername() {
 		return username;
@@ -40,6 +46,12 @@ public class UserDto {
 	}
 	public void setLevelRank(LevelRank levelRank) {
 		this.levelRank = levelRank;
+	}
+	public Set<ResultChallange> getResultTrophies() {
+		return resultTrophies;
+	}
+	public void setResultTrophies(Set<ResultChallange> resultTrophies) {
+		this.resultTrophies = resultTrophies;
 	}
 
 }

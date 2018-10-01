@@ -2,8 +2,15 @@ package com.uniovi.quizapp.dataacess.model.challange;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property ="className", include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = ChallangeSection.class, name = "com.uniovi.quizapp.dataacess.model.challange.ChallangeSection"),
+	@JsonSubTypes.Type(value = ChallangeTrophy.class, name = "com.uniovi.quizapp.dataacess.model.challange.ChallangeTrophy")
+})
 @Entity("Challange")
 public abstract class Challange extends DefaultEntity {
 	

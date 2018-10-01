@@ -5,11 +5,13 @@ import { routing } from './profile.routing'
 
 import { ProfileComponent } from './components/profile/profile.component';
 import { RankLevelComponent } from './components/rank-level/rank-level.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     routing,
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   declarations: [ProfileComponent, RankLevelComponent]
 })

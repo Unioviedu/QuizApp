@@ -3,11 +3,14 @@ package com.uniovi.quizapp.service.dto.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
+
 public class ResponseLevelDto {
 	
 	private List<String> levelsUnlock = new ArrayList<>();
 	private List<String> sectionsUnlock = new ArrayList<>();
-	private List<String> challangesComplete = new ArrayList<>();
+	private List<ResultChallange> challangesComplete = new ArrayList<>();
+	private List<ResultChallange> trophiesComplete = new ArrayList<>();
 	private int newExp;
 	
 	public List<String> getLevelsUnlock() {
@@ -28,13 +31,7 @@ public class ResponseLevelDto {
 	public void setNewExp(int newExp) {
 		this.newExp = newExp;
 	}
-	public List<String> getChallangesComplete() {
-		return challangesComplete;
-	}
-	public void setChallangesComplete(List<String> challangesComplete) {
-		this.challangesComplete = challangesComplete;
-	}
-	
+
 	public void addLevel(String levelTitle) {
 		levelsUnlock.add(levelTitle);
 	}
@@ -47,9 +44,26 @@ public class ResponseLevelDto {
 		this.newExp = this.newExp + exp;
 	}
 	
-	public void addChallange(String challangeDescription) {
-		challangesComplete.add(challangeDescription);
+	public void addChallange(ResultChallange challange) {
+		challangesComplete.add(challange);
 	}
+	public void addTrophy(ResultChallange trophy) {
+		trophiesComplete.add(trophy);
+	}
+	public List<ResultChallange> getChallangesComplete() {
+		return challangesComplete;
+	}
+	public void setChallangesComplete(List<ResultChallange> challangesComplete) {
+		this.challangesComplete = challangesComplete;
+	}
+	public List<ResultChallange> getTrophiesComplete() {
+		return trophiesComplete;
+	}
+	public void setTrophiesComplete(List<ResultChallange> trophiesComplete) {
+		this.trophiesComplete = trophiesComplete;
+	}
+	
+	
 	
 	
 

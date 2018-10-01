@@ -25,6 +25,7 @@ export class SectionComponent implements OnInit {
   levelsUnlock: string[] = [];
   sectionsUnlock: string[] = [];
   challangesComplete: string[] = [];
+  trophiesComplete: string[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private sectionsService: SectionsService) {
@@ -43,6 +44,7 @@ export class SectionComponent implements OnInit {
       this.levelsUnlock = newInfo.levelsUnlock;
       this.sectionsUnlock = newInfo.sectionsUnlock;
       this.challangesComplete = newInfo.challangesComplete;
+      this.trophiesComplete = newInfo.trophiesComplete;
 
       jQuery(this.myModal.nativeElement).modal('show');
       this.sectionsService.changeInfo(null);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-rank-level',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rank-level.component.css']
 })
 export class RankLevelComponent implements OnInit {
+  
+  @Input()
+  levelRank: any = {};
 
   constructor() { }
 

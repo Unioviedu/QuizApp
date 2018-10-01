@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 export class ProfileComponent implements OnInit {
   user: any = {};
   levelRank: any = {};
+  trophies: any[] = [];
 
   constructor(private userService: UserService) { }
 
@@ -21,6 +22,9 @@ export class ProfileComponent implements OnInit {
       data => {
         this.user = data;
         this.levelRank = data.levelRank;
+        this.trophies = data.resultTrophies;
+
+        this.levelRank.userExperience = this.user.experience;
       }
     );
   }

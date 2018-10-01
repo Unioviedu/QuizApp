@@ -38,7 +38,7 @@
 </div>
 
 <div #myModal class="modal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
@@ -51,21 +51,28 @@
                 <div *ngIf="levelsUnlock.length > 0" class="alert alert-warning">
                     <h6>Levels unlocked</h6>
                     <ul>
-                        <li *ngFor="let level of newInfo.levelsUnlock">{{level}}</li>
+                        <li *ngFor="let level of levelsUnlock">{{level}}</li>
                     </ul>
                 </div>
 
                 <div *ngIf="sectionsUnlock.length > 0" class="alert alert-warning">
                     <h6>Sections unlocked</h6>
                     <ul>
-                        <li *ngFor="let section of newInfo.sectionsUnlock">{{section}}</li>
+                        <li *ngFor="let section of sectionsUnlock">{{section}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="trophiesComplete.length > 0" class="alert alert-secondary">
+                    <h6>Trophies complete</h6>
+                    <ul>
+                        <li *ngFor="let result of trophiesComplete">{{result.challange.title}}</li>
                     </ul>
                 </div>
 
                 <div *ngIf="challangesComplete.length > 0" class="alert alert-secondary">
-                    <h6>Challange complete</h6>
+                    <h6>Challanges complete</h6>
                     <ul>
-                        <li *ngFor="let challange of newInfo.challangesComplete">{{challange}}</li>
+                        <li *ngFor="let result of challangesComplete">{{result.challange.description}}</li>
                     </ul>
                 </div>
 

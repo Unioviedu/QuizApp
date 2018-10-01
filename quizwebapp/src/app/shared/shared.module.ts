@@ -22,7 +22,8 @@ import { TrophiesComponent } from './components/trophies/trophies.component';
   exports: [
     SectionCardComponent,
     NavbarComponent,
-    LevelCardComponent
+    LevelCardComponent,
+    TrophiesComponent
   ]
 })
 export class SharedModule { }

@@ -20,6 +20,7 @@ import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.api.ILevelManagement;
 import com.uniovi.quizapp.logic.general.AbstractManagement;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
+import com.uniovi.quizapp.logic.general.TrophyFunction;
 import com.uniovi.quizapp.service.dto.level.ResponseLevelDto;
 import com.uniovi.quizapp.service.dto.level.ResultLevelDto;
 
@@ -47,6 +48,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 		checkNewResult(newResult, resultSection, user);
 		checkSection(newResult, resultSection, user);
 		checkChallangesSection(resultSection);
+		checkChallangesTrophy(user);
 		checkLevelRank(user);
 
 		userDao.saveOrUpdate(user);
@@ -112,7 +114,19 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 				challange.setComplete(isComplete);
 				
 				if (isComplete)
-					response.addChallange(challange.getChallange().getDescription());
+					response.addChallange(challange);
+			}
+		}
+	}
+	
+	private void checkChallangesTrophy (User user) {
+		for (ResultChallange trophy: user.getResultTrophies()) {
+			if (!trophy.isComplete()) {
+				boolean isComplete = new TrophyFunction().checkTrophies(trophy.getChallange().getCodChallange(), user);
+				trophy.setComplete(isComplete);
+				
+				if (isComplete)
+					response.addTrophy(trophy);
 			}
 		}
 	}

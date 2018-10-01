@@ -12,71 +12,8 @@
 
 <div class="card-columns">
 
-    <div class="card text-center text-white bg-dark mb-3" style="width: 100%">
-        <div class="card-header">
-            <h2 class="display-5">Level Rank</h2>
-        </div>
-        <div class="card-body">
-            <img src="assets/noob.svg" class="rounded-circle" alt="Cinque Terre" width="304" height="226">
-            <h2 class="display-3">{{levelRank.name}}</h2>
-            <hr>
-            <h1 class="display-2">{{user.experience}} exp</h1>
-        </div>
-    </div>
+    <app-rank-level [levelRank]="levelRank"></app-rank-level>
 
-    <div class="card text-center text-white bg-warning mb-3" style="width: 100%">
-        <div class="card-header">
-            <h2 class="display-5">Trophies</h2>
-        </div>
-        <div class="card-body">
-            <ul class="list-group text-dark text-left" style="margin-bottom: 15px">
-                <li class="list-group-item list-group-item-light">
-                    <div class="row">
-                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
-                        <div class="col">
-                            <h4>Un pequeño paso...</h4>
-                            Completa la primera sección del modo historia
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light">
-                    <div class="row">
-                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
-                        <div class="col">
-                            <h4>Un pequeño paso...</h4>
-                            Completa la primera sección del modo historia
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light">
-                    <div class="row">
-                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
-                        <div class="col">
-                            <h4>Un pequeño paso...</h4>
-                            Completa la primera sección del modo historia
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light">
-                    <div class="row">
-                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
-                        <div class="col">
-                            <h4>Un pequeño paso...</h4>
-                            Completa la primera sección del modo historia
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light">
-                    <div class="row">
-                        <img class="img-responsive" src="assets/trophy.svg" width="60" height="60">
-                        <div class="col">
-                            <h4>Un pequeño paso...</h4>
-                            Completa la primera sección del modo historia
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <app-trophies [trophies]="trophies"></app-trophies>
 
 </div>

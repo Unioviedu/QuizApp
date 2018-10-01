@@ -149,7 +149,7 @@ public class GenerateDB {
 		
 		ResultChallange rc = new ResultChallange(c1);
 		
-		user.addResultTrophy(rc);
+		user.getResultTrophies().add(rc);
 	}
 
 }

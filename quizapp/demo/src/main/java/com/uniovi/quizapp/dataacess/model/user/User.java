@@ -1,7 +1,9 @@
 package com.uniovi.quizapp.dataacess.model.user;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
@@ -14,7 +16,7 @@ public class User extends DefaultEntity {
 	private int experience;
 	private LevelRank levelRank;
 	
-	private Map<Integer, ResultChallange> resultTrophies = new HashMap<>();
+	private Set<ResultChallange> resultTrophies = new HashSet<>();
 	private Map<String, ResultSection> resultSections = new HashMap<>();
 	
 	public User() {}
@@ -76,16 +78,12 @@ public class User extends DefaultEntity {
 		this.levelRank = levelRank;
 	}
 
-	public Map<Integer, ResultChallange> getResultTrophies() {
+	public Set<ResultChallange> getResultTrophies() {
 		return resultTrophies;
 	}
 
-	public void setResultTrophies(Map<Integer, ResultChallange> resultTrophies) {
+	public void setResultTrophies(Set<ResultChallange> resultTrophies) {
 		this.resultTrophies = resultTrophies;
-	}	
-	
-	public void addResultTrophy(ResultChallange rt) {
-		this.resultTrophies.put(rt.getChallange().getCodChallange(), rt);
 	}
 	
 	
