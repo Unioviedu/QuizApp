@@ -1,6 +1,7 @@
 package com.uniovi.quizapp.service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,12 @@ public class UserController implements IUserController {
 	@RequestMapping("/user")
 	public UserDto getUser(@RequestParam("username") String username) {
 		return userManagement.getUser(username);
+	}
+
+	@Override
+	@RequestMapping("/register")
+	public UserDto register(@RequestBody UserDto userDto) {
+		return userManagement.registerNewUser(userDto);
 	}
 	
 	

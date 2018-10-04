@@ -17,7 +17,7 @@ public abstract class Challange extends DefaultEntity {
 	private int codChallange;
 	private String description;
 	private int experience;
-	protected ChallangeType challageType;
+	protected ChallangeType challangeType;
 
 	public Challange() {}
 	
@@ -51,11 +51,11 @@ public abstract class Challange extends DefaultEntity {
 	}
 
 	public ChallangeType getChallangeType() {
-		return challageType;
+		return challangeType;
 	}
 
 	public void setChallangeType(ChallangeType type) {
-		this.challageType = type;
+		this.challangeType = type;
 	}
 	
 	

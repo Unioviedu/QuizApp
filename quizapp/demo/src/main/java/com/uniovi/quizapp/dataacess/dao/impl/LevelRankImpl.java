@@ -26,4 +26,11 @@ public class LevelRankImpl extends IDaoGenericImpl<LevelRank, ObjectId> implemen
 		return LevelRank.class;
 	}
 
+	@Override
+	public LevelRank findFirstLevelRank() {
+		return datastore.createQuery(getEntityClass())
+				.field("experience")
+				.equal(0).get();
+	}
+
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from './services/authentication.service'
+import { AuthenticationService } from '../../services/authentication.service'
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -12,6 +12,7 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
+  loginFailed = false;
   submitted = false;
   returnUrl: string;
 
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loginFailed = false;
     this.submitted = true;
 
     if (this.loginForm.invalid) {
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                  console.log("Error");
+                    this.loginFailed = true;
                     this.loading = false;
                 });
   }

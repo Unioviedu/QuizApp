@@ -13,6 +13,7 @@ public class UserDto {
 	private String username;
 	private String password;
 	private int experience;
+	private String mail;
 	private LevelRank levelRank;
 	
 	private Set<ResultChallange> resultTrophies = new HashSet<>();
@@ -52,6 +53,12 @@ public class UserDto {
 	}
 	public void setResultTrophies(Set<ResultChallange> resultTrophies) {
 		this.resultTrophies = resultTrophies;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 }

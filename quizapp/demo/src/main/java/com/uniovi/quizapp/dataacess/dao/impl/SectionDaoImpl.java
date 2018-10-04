@@ -20,4 +20,12 @@ public class SectionDaoImpl extends IDaoGenericImpl<Section, ObjectId> implement
 		return findByField("codSection", codSection);
 	}
 
+	@Override
+	public Section findFirstSection() {
+		return datastore
+				.createQuery(getEntityClass())
+				.field("codSection")
+				.equal("1").get();
+	}
+
 }

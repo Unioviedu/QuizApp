@@ -7,34 +7,29 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 
-import { AuthGuard } from './login/services/auth.guard';
-import { AuthenticationService } from './login/services/authentication.service';
 import { JwtInterceptor } from './login/services/jwt.interceptor';
 
 import { HistoryModule } from './history/history.module';
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
+    routing,
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    routing,
     HistoryModule,
     ProfileModule,
+    LoginModule,
     SharedModule
   ],
   providers: [
-    AuthGuard,
-    AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

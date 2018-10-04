@@ -8,5 +8,6 @@ import com.uniovi.quizapp.dataacess.model.LevelRank;
 public interface ILevelRankDao extends IDaoGeneric<LevelRank, ObjectId> {
 	
 	public LevelRank findByExp(int exp);
+	public LevelRank findFirstLevelRank();
 
 }

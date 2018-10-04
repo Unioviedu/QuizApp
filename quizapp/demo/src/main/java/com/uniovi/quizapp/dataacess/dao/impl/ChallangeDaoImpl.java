@@ -1,5 +1,7 @@
 package com.uniovi.quizapp.dataacess.dao.impl;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +14,19 @@ import com.uniovi.quizapp.dataacess.model.challange.ChallangeType;
 public class ChallangeDaoImpl extends IDaoGenericImpl<Challange, ObjectId> implements IChallangeDao {
 
 	@Override
-	public Challange findAllChallangeSection() {
+	public List<Challange> findAllChallangeSection() {
 		return datastore.createQuery(getEntityClass())
-				.field("type")
+				.field("challangeType")
 				.equal(ChallangeType.SECTION)
-				.get();
+				.asList();
 	}
 
 	@Override
-	public Challange findAllTrohpies() {
+	public List<Challange> findAllTrohpies() {
 		return datastore.createQuery(getEntityClass())
-				.field("type")
+				.field("challangeType")
 				.equal(ChallangeType.TROPHY)
-				.get();
+				.asList();
 	}
 	
 	@Override

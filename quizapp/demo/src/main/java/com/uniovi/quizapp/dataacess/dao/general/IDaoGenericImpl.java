@@ -14,7 +14,7 @@ public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> {
 	public Datastore datastore;
 	
 	public void saveOrUpdate(ENTITY entity) {
-		datastore.merge(entity);
+		datastore.save(entity);
 	}
 	
 	public ENTITY find(ID id) {

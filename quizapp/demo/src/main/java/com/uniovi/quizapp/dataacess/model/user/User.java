@@ -2,16 +2,20 @@ package com.uniovi.quizapp.dataacess.model.user;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.uniovi.quizapp.dataacess.model.LevelRank;
+import com.uniovi.quizapp.dataacess.model.Section;
+import com.uniovi.quizapp.dataacess.model.challange.Challange;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
 public class User extends DefaultEntity {
 	
 	private String username;
 	private String password;
+	private String mail;
 	
 	private int experience;
 	private LevelRank levelRank;
@@ -21,10 +25,24 @@ public class User extends DefaultEntity {
 	
 	public User() {}
 	
-	public User(String username, String password) {
+	public User(String username, String password, String mail, Section firstSection, 
+			List<Challange> challanges, List<Challange> trophies,
+			LevelRank firstLevelRank) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.mail = mail;
+		
+		this.levelRank = firstLevelRank;
+		
+		ResultSection rs1 = new ResultSection(firstSection, challanges);
+		rs1.setUnlocked(true);
+		resultSections.put(firstSection.getCodSection(), rs1);
+		
+		for (Challange trophy: trophies) {
+			ResultChallange rc = new ResultChallange(trophy);
+			resultTrophies.add(rc);
+		}
 	}
 	
 	public void sumExp(int exp) {
@@ -84,6 +102,14 @@ public class User extends DefaultEntity {
 
 	public void setResultTrophies(Set<ResultChallange> resultTrophies) {
 		this.resultTrophies = resultTrophies;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	
 	

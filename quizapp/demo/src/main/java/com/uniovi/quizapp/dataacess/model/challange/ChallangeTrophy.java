@@ -6,7 +6,7 @@ public class ChallangeTrophy extends Challange {
 	
 	public ChallangeTrophy(int codChallange, String description, String title) {
 		super(codChallange, description);
-		this.challageType = ChallangeType.TROPHY;
+		this.challangeType = ChallangeType.TROPHY;
 		this.title = title;
 	}
 	

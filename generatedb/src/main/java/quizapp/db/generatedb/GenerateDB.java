@@ -16,8 +16,6 @@ import com.uniovi.quizapp.dataacess.model.challange.ChallangeTrophy;
 import com.uniovi.quizapp.dataacess.model.question.Option;
 import com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock;
 import com.uniovi.quizapp.dataacess.model.question.QuestionOptions;
-import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
-import com.uniovi.quizapp.dataacess.model.user.ResultSection;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
 import com.uniovi.quizapp.logic.general.TrophyFunction;
@@ -25,6 +23,7 @@ import com.uniovi.quizapp.logic.general.TrophyFunction;
 public class GenerateDB {
 	
 	List<Challange> challanges = new ArrayList<>();
+	List<Challange> trophies = new ArrayList<>();
 	List<LevelRank> levelsRank = new ArrayList<>();
 	List<Section> sections = new ArrayList<>();
 	User user;
@@ -92,11 +91,7 @@ public class GenerateDB {
 		Section s4 = new Section("4", "Principios avanzados", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
 		s4.addLevels(l41);
 		
-		ResultSection rs1 = new ResultSection(s1, challanges);
-		rs1.setUnlocked(true);
-		
-		User user = new User("edu", "edu");
-		user.addResultSection(rs1);
+		User user = new User("edu", "edu", "edumac710@gmail.com", s1, challanges, trophies, levelsRank.get(0));
 		
 		this.user = user;
 		sections.add(s1);
@@ -107,6 +102,7 @@ public class GenerateDB {
 		createTrophies();
 		
 		datastore.save(challanges);
+		datastore.save(trophies);
 		datastore.save(levelsRank);
 		datastore.save(sections);
 		datastore.save(user);
@@ -147,9 +143,7 @@ public class GenerateDB {
 				"Completa tu primera sección del modo historia",
 				"Un pequeño paso...");
 		
-		ResultChallange rc = new ResultChallange(c1);
-		
-		user.getResultTrophies().add(rc);
+		trophies.add(c1);
 	}
 
 }
