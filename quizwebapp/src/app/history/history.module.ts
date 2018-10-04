@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { routing } from './history.routing'
+import { routing } from './history.routing';
 
 import { SectionsComponent } from './components/sections/sections.component';
 import { SharedModule } from '../shared/shared.module';

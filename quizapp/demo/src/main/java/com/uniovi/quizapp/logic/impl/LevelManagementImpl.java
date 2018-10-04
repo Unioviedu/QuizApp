@@ -10,9 +10,9 @@ import com.uniovi.quizapp.dataacess.dao.api.IChallangeDao;
 import com.uniovi.quizapp.dataacess.dao.api.ILevelRankDao;
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
-import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
 import com.uniovi.quizapp.dataacess.model.user.ResultSection;
@@ -141,7 +141,7 @@ public class LevelManagementImpl extends AbstractManagement implements ILevelMan
 		Section sectionCurrent = sectionDao.findByCod(newResult.getCodSection());
 
 		for (String codSectionUnlock : sectionCurrent.getNextSections()) {
-			Section section = sectionDao.findByField("codSection", codSectionUnlock);
+			Section section = sectionDao.findByCod(codSectionUnlock);
 			List<Challange> challanges = changeDao.findAll();
 			ResultSection rs = new ResultSection(section, challanges);
 			rs.setUnlocked(true);

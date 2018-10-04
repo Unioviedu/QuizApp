@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.ILevelRankDao;
 import com.uniovi.quizapp.dataacess.dao.general.IDaoGenericImpl;
-import com.uniovi.quizapp.dataacess.model.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 
 @Service
 public class LevelRankImpl extends IDaoGenericImpl<LevelRank, ObjectId> implements ILevelRankDao {

@@ -1,4 +1,4 @@
-package com.uniovi.quizapp.dataacess.model;
+package com.uniovi.quizapp.dataacess.model.user;
 
 import org.mongodb.morphia.annotations.Entity;
 

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.uniovi.quizapp.dataacess.model.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -8,7 +8,6 @@ import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
 import com.uniovi.quizapp.dataacess.model.Level;
-import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
 import com.uniovi.quizapp.dataacess.model.challange.ChallangeSection;
@@ -16,6 +15,7 @@ import com.uniovi.quizapp.dataacess.model.challange.ChallangeTrophy;
 import com.uniovi.quizapp.dataacess.model.question.Option;
 import com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock;
 import com.uniovi.quizapp.dataacess.model.question.QuestionOptions;
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
 import com.uniovi.quizapp.logic.general.TrophyFunction;

@@ -17,7 +17,7 @@ public class SectionDaoImpl extends IDaoGenericImpl<Section, ObjectId> implement
 
 	@Override
 	public Section findByCod(String codSection) {
-		return findByField("codSection", codSection);
+		return findByField("codSection", codSection).get(0);
 	}
 
 	@Override

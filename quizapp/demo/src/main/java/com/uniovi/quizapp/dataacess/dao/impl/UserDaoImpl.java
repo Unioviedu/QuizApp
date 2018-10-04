@@ -11,7 +11,7 @@ import com.uniovi.quizapp.dataacess.model.user.User;
 public class UserDaoImpl extends IDaoGenericImpl<User, ObjectId> implements IUserDao {
 	
 	public User findByUsername(String username) {
-		return findByField("username", username);
+		return findByField("username", username).get(0);
 	}
 
 	@Override

@@ -9,5 +9,5 @@ const appRoutes: Routes = [
     { path: 'section/:cod', component: SectionComponent, canActivate: [AuthGuard] },
     { path: 'level/:cod', component: LevelComponent, canActivate: [AuthGuard] }
 ];
- 
+
 export const routing = RouterModule.forChild(appRoutes);

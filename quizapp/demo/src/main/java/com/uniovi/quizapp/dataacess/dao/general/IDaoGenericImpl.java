@@ -28,10 +28,10 @@ public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> {
 				.asList();
 	}
 	
-	public ENTITY findByField (String field, String fieldValue) {
+	public List<ENTITY> findByField (String field, String fieldValue) {
 		return datastore.createQuery(getEntityClass())
 				.field(field).equal(fieldValue)
-				.get();
+				.asList();
 	}
 	
 	public void delete (ENTITY entity) {

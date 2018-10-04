@@ -11,15 +11,15 @@ import { Router } from '../../../../../node_modules/@angular/router';
 })
 export class LevelComponent implements AfterViewInit, OnInit {
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
-  index: number = 0;
+  index = 0;
   qDuos: QuestionDuo[];
   alertType: string = null;
 
   questions: number;
-  correctQuestion: number = 0;
-  incorrectQuestion: number = 0;
-  progressCorrect: string = "0%";
-  progressIncorrect: string = "0%";
+  correctQuestion = 0;
+  incorrectQuestion = 0;
+  progressCorrect = '0%';
+  progressIncorrect = '0%';
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private cdr: ChangeDetectorRef,
@@ -42,7 +42,7 @@ export class LevelComponent implements AfterViewInit, OnInit {
   }
 
   loadQuestion() {
-    let qDuo = this.qDuos[this.index];
+    const qDuo = this.qDuos[this.index];
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(qDuo.component);
     const viewContainerRef = this.dQuestion.viewContainerRef;
@@ -58,14 +58,14 @@ export class LevelComponent implements AfterViewInit, OnInit {
   responseQuestion(isCorrect: boolean) {
     if (isCorrect) {
       this.correctQuestion++;
-      this.alertType = "correct";
-      let percentajeCorrect = (this.correctQuestion / this.questions) * 100;
-      this.progressCorrect = percentajeCorrect.toString() + "%";
+      this.alertType = 'correct';
+      const percentajeCorrect = (this.correctQuestion / this.questions) * 100;
+      this.progressCorrect = percentajeCorrect.toString() + '%';
     } else {
       this.incorrectQuestion++;
       this.alertType = "incorrect";
       let percentajeIncorrect = (this.incorrectQuestion / this.questions) * 100;
-      this.progressIncorrect = percentajeIncorrect.toString() + "%";
+      this.progressIncorrect = percentajeIncorrect.toString() + '%';
     }
   }
 

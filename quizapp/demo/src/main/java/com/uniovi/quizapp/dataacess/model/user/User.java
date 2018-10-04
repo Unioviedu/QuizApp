@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.uniovi.quizapp.dataacess.model.LevelRank;
 import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;

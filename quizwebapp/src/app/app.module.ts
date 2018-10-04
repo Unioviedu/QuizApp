@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule }    from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -14,6 +13,7 @@ import { HistoryModule } from './history/history.module';
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
 import { LoginModule } from './login/login.module';
+import { CompetitiveModule } from './competitive/competitive.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { LoginModule } from './login/login.module';
     HistoryModule,
     ProfileModule,
     LoginModule,
+    CompetitiveModule,
     SharedModule
   ],
   providers: [

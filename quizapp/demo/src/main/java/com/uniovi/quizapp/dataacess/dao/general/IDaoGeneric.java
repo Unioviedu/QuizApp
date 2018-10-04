@@ -12,7 +12,7 @@ public interface IDaoGeneric<ENTITY extends IEntity, ID> {
 	
 	public List<ENTITY> findAll();
 	
-	public ENTITY findByField(String field, String fieldValue);
+	public List<ENTITY> findByField(String field, String fieldValue);
 	
 	public void delete(ENTITY entity);
 	
