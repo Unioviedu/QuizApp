@@ -1,0 +1,47 @@
+<div class="row">
+
+    <div class="col-sm-6">
+        <form [formGroup]="questionForm">
+            <div class="form-group" style="width: 100%;">
+                <label for="exampleInputEmail1">Titulo</label>
+                <input formControlName="title" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <div class="form-group" style="width: 100%">
+                <label for="exampleInputPassword1">Statement</label>
+                <textarea formControlName="statement" rows="8" class="form-control">With textarea</textarea>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group" style="width: 100%">
+
+            <form [formGroup]="optionsForm">
+                <label for="exampleInputEmail1">Options</label>
+                <div class="input-group mb-3" *ngFor="let option of options;let i = index">
+                    <div class="input-group-prepend" style="width: 80%;">
+                        <input [formControlName]="option" type="text" class="form-control">
+                    </div>
+                    <select class="custom-select text-center" [formControlName]="i+1" style="width: 20%;">
+                          <option value="0" selected>F</option>
+                          <option value="1">V</option>
+                        </select>
+                </div>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Add</button>
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button (click)="removeOption()" type="button" class="btn btn-danger btn-xs">Remove</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<hr>
+<button (click)="save()" type="submit" class="btn btn-primary">Submit</button>
