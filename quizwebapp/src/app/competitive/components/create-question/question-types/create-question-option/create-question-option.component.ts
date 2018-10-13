@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
-
-declare var $: any;
+import { CompetitiveService } from '../../../../services/competitive.services';
 
 @Component({
   selector: 'app-create-question-option',
@@ -15,7 +14,8 @@ export class CreateQuestionOptionComponent implements OnInit {
   options: any = ['option1'];
   index = 1;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private service: CompetitiveService) {
 
     this.questionForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
@@ -56,7 +56,29 @@ export class CreateQuestionOptionComponent implements OnInit {
   save() {
     const questionForm = this.questionForm.controls;
     const optionsForm = this.optionsForm.controls;
-    debugger
+  
+    let optionsObj = [];
+
+    this.options.forEach(
+      function (value, i) {
+        const optionObj = {
+          'value': optionsForm[value].value,
+          'correct': optionsForm[(i+1).toString()].value === 'true'
+        }
+
+        optionsObj.push(optionObj);
+      }
+    )
+    
+    const newQuestion = {
+      'title': questionForm.title.value,
+      'statement': questionForm.statement.value,
+      'type': 'option',
+      'options': optionsObj
+    }
+
+    this.service.createNewQuestion(newQuestion).subscribe();
+    
   }
 
 }

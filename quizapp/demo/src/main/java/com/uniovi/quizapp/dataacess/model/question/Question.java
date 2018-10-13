@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property ="className", include = JsonTypeInfo.As.PROPERTY)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property ="type", include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
-	@JsonSubTypes.Type(value = QuestionOptions.class, name = "com.uniovi.quizapp.dataacess.model.question.QuestionOptions"),
-	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock")
+	@JsonSubTypes.Type(value = QuestionOptions.class, name = "option"),
+	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "codeBlock")
 })
 @Entity
 public abstract class Question extends DefaultEntity {
