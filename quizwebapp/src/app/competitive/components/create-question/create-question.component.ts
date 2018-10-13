@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CompetitiveService } from '../../services/competitive.services';
 
 @Component({
   selector: 'app-create-question',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class CreateQuestionComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private service: CompetitiveService) { }
 
   ngOnInit() {
+  }
+
+  newQuestion(newQuestion: any) {
+    this.service.createNewQuestion(newQuestion).subscribe();
   }
 
 

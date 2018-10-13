@@ -18,23 +18,26 @@
         <div class="form-group" style="width: 100%">
 
             <form [formGroup]="optionsForm">
-                <label for="exampleInputEmail1">Options</label>
-                <div class="input-group mb-3" *ngFor="let option of options;let i = index">
-                    <div class="input-group-prepend" style="width: 80%;">
+                <div class="form-group" style="width: 100%;">
+
+                    <label for="exampleInputEmail1">Options</label>
+                    <div class="input-group mb-3" *ngFor="let option of options;let i = index">
                         <input [formControlName]="option" type="text" class="form-control">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input formControlName="{{option}}isCorrect" type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="removeOption(option)" type="button"><span class="fa fa-close"></span></button>
+                        </div>
                     </div>
-                    <select class="custom-select text-center" [formControlName]="i+1" style="width: 20%;">
-                          <option value="false" selected>F</option>
-                          <option value="true">V</option>
-                        </select>
-                </div>
-                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Add</button>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Add</button>
+                        </div>
                     </div>
-                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button (click)="removeOption()" type="button" class="btn btn-danger btn-xs">Remove</button>
-                    </div>
+
                 </div>
             </form>
 
