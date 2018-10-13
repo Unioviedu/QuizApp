@@ -59,26 +59,24 @@ export class CreateQuestionOptionComponent implements OnInit {
     const optionsObj = [];
 
     this.options.forEach(
-      function (value, i) {
+      function (value) {
         const optionObj = {
           'value': optionsForm[value].value,
           'correct': optionsForm[value + 'isCorrect'].value
-        }
+        };
 
         optionsObj.push(optionObj);
       }
-    )
-    
+    );
+
     const newQuestion = {
       'title': questionForm.title.value,
       'statement': questionForm.statement.value,
       'type': 'option',
       'options': optionsObj
-    }
-    
+    };
+
     this.newQuestionEvent.emit(newQuestion);
-    //this.service.createNewQuestion(newQuestion).subscribe();
-    
   }
 
 }

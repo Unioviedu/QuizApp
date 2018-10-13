@@ -10,5 +10,7 @@ import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
 public interface ICustomQuestionDao extends IDaoGeneric<CustomQuestion, ObjectId> {
 	
 	public List<CustomQuestion> findByUser(String username);
+	
+	public CustomQuestion findQuestionForVote(String username);
 
 }

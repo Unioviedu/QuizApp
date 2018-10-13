@@ -3,6 +3,7 @@ package com.uniovi.quizapp.service.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uniovi.quizapp.logic.api.ICustomQuestionManagement;
@@ -19,6 +20,13 @@ public class CustomQuestionController implements ICustomQuestionController {
 	@Override
 	public void newQuestion(@RequestBody CustomQuestionDto dto) {
 		this.management.newCustomQuestion(dto);
+	}
+	
+	@RequestMapping("/nextQuestion")
+	@Override
+	public CustomQuestionDto nextQuestion(@RequestParam("username") String username, 
+			@RequestParam("cont") int contQuestion) {
+		return management.nextCustomQuestion(username, contQuestion);
 	}
 
 }

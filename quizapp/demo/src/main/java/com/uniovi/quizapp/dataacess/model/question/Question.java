@@ -6,7 +6,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property ="type", include = JsonTypeInfo.As.PROPERTY)
+@JsonTypeInfo(
+		use = JsonTypeInfo.Id.NAME, 
+		property ="type", 
+		include = JsonTypeInfo.As.PROPERTY,
+		visible = true)
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = QuestionOptions.class, name = "option"),
 	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "codeBlock")

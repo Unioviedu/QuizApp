@@ -5,9 +5,7 @@ public class QuestionCodeBlock extends Question {
 	private String[] codeBlocksOptions;
 	private String[] codeBlocksCorrect;
 	
-	public QuestionCodeBlock() {
-		
-	}
+	public QuestionCodeBlock() {}
 	
 	public QuestionCodeBlock(String title, String statement) {
 		super(title, statement, "codeBlock");

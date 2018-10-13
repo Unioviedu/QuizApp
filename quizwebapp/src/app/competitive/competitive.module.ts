@@ -7,6 +7,9 @@ import { CreateQuestionComponent } from './components/create-question/create-que
 import { CreateQuestionOptionComponent } from './components/create-question/question-types/create-question-option/create-question-option.component';
 import { CreateQuestionCodeBlockComponent } from './components/create-question/question-types/create-question-code-block/create-question-code-block.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlayQuestionComponent } from './components/play-question/play-question.component';
+
+import { QuestionDirective } from './components/play-question/directives/question.directive';
 
 @NgModule({
   imports: [
@@ -14,6 +17,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     routing,
     ReactiveFormsModule
   ],
-  declarations: [CompetitiveHomeComponent, CreateQuestionComponent, CreateQuestionOptionComponent, CreateQuestionCodeBlockComponent]
+  declarations: [
+    CompetitiveHomeComponent,
+    CreateQuestionComponent,
+    CreateQuestionOptionComponent,
+    CreateQuestionCodeBlockComponent,
+    PlayQuestionComponent,
+    QuestionDirective
+  ]
 })
 export class CompetitiveModule { }

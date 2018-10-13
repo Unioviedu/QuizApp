@@ -24,7 +24,7 @@
                 <div class="form-group" style="width: 100%;">
                     <label for="exampleInputEmail1">Options</label>
                     <div class="input-group mb-3" *ngFor="let option of options;let i = index">
-                        <input type="text" formControlName="{{option.id}}" class="form-control" aria-describedby="button-addon2">
+                        <input (input)="onOptionChange($event.target.value, option)" type="text" formControlName="{{option.id}}" class="form-control">
                         <div class="input-group-append">
                             <button class="btn btn-warning" (click)="convertInCorrect(option)" type="button"><span class="{{option.icon}}"></span></button>
                         </div>
@@ -45,7 +45,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{i+1}}</span>
                         </div>
-                        <input type="text" formControlName="correct{{option.id}}" class="form-control" aria-describedby="button-addon2">
+                        <input type="text" formControlName="correct{{option.id}}" class="form-control" readonly=true>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" (click)="removeCorrectOption(option)" type="button"><span class="fa fa-close"></span></button>
                         </div>

@@ -5,5 +5,7 @@ import com.uniovi.quizapp.service.dto.CustomQuestionDto;
 public interface ICustomQuestionManagement {
 	
 	public void newCustomQuestion(CustomQuestionDto dto);
+	
+	public CustomQuestionDto nextCustomQuestion(String username, int cont);
 
 }

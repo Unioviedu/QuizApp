@@ -50,6 +50,14 @@ export class CreateQuestionCodeBlockComponent implements OnInit {
     }
   }
 
+  onOptionChange(value, option) {
+    const index = this.correctOptions.indexOf(option);
+
+    if (index > -1) {
+      this.optionsForm.controls['correct' + option.id].setValue(value);
+    }
+  }
+
   removeOption(option) {
     let index = this.options.indexOf(option);
     this.options.splice(index, 1);
@@ -90,6 +98,39 @@ export class CreateQuestionCodeBlockComponent implements OnInit {
     });
 
     return new FormGroup(group);
+  }
+
+  save() {
+    const questionForm = this.questionForm.controls;
+    const optionsForm = this.optionsForm.controls;
+
+    const optionsObj = [];
+    const correctOptionsObj = [];
+
+    this.options.forEach(
+      function(option) {
+        const value = optionsForm[option.id].value;
+        optionsObj.push(value);
+      }
+    );
+
+    this.correctOptions.forEach(
+      function(correctOption) {
+        const value = optionsForm['correct' + correctOption.id].value;
+        correctOptionsObj.push(value);
+      }
+    );
+
+    const newQuestion = {
+      'title': questionForm.title.value,
+      'statement': questionForm.statement.value,
+      'type': 'codeBlock',
+      'codeBlocksOptions': optionsObj,
+      'codeBlocksCorrect': correctOptionsObj
+    };
+
+    this.newQuestionEvent.emit(newQuestion);
+
   }
 
 }

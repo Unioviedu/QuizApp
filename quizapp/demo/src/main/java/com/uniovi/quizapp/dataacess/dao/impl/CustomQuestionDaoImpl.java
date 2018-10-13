@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.uniovi.quizapp.dataacess.dao.api.ICustomQuestionDao;
 import com.uniovi.quizapp.dataacess.dao.general.IDaoGenericImpl;
 import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
+import com.uniovi.quizapp.dataacess.model.question.StateQuestion;
 
 @Service
 public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, ObjectId> implements ICustomQuestionDao {
@@ -20,6 +21,15 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 	@Override
 	public Class<CustomQuestion> getEntityClass() {
 		return CustomQuestion.class;
+	}
+
+	@Override
+	public CustomQuestion findQuestionForVote(String username) {
+		return datastore
+				.createQuery(CustomQuestion.class)
+				.field("username").notEqual(username)
+				.field("state").equal(StateQuestion.CREATED) 
+				.get();
 	}
 
 }
