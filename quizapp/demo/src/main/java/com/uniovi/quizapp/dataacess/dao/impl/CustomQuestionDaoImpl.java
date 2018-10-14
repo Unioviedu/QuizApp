@@ -24,12 +24,21 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 	}
 
 	@Override
-	public CustomQuestion findQuestionForVote(String username) {
+	public List<CustomQuestion> findQuestionForVote(String username) {
 		return datastore
 				.createQuery(CustomQuestion.class)
 				.field("username").notEqual(username)
-				.field("state").equal(StateQuestion.CREATED) 
-				.get();
+				.field("state").equal(StateQuestion.CREATED)
+				.asList();
+	}
+
+	@Override
+	public List<CustomQuestion> findQuestionForPlay(String username) {
+		return datastore
+				.createQuery(CustomQuestion.class)
+				.field("username").notEqual(username)
+				.field("state").equal(StateQuestion.ACCEPT)
+				.asList();
 	}
 
 }

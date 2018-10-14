@@ -11,6 +11,8 @@ public interface ICustomQuestionDao extends IDaoGeneric<CustomQuestion, ObjectId
 	
 	public List<CustomQuestion> findByUser(String username);
 	
-	public CustomQuestion findQuestionForVote(String username);
+	public List<CustomQuestion> findQuestionForVote(String username);
+
+	public List<CustomQuestion> findQuestionForPlay(String username);
 
 }

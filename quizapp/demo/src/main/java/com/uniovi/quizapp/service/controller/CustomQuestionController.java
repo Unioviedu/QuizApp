@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uniovi.quizapp.logic.api.ICustomQuestionManagement;
 import com.uniovi.quizapp.service.api.ICustomQuestionController;
-import com.uniovi.quizapp.service.dto.CustomQuestionDto;
+import com.uniovi.quizapp.service.dto.customQuestion.CustomQuestionDto;
+import com.uniovi.quizapp.service.dto.customQuestion.ResponseQuestionDto;
+import com.uniovi.quizapp.service.dto.customQuestion.VoteQuestionDto;
 
 @RestController
 public class CustomQuestionController implements ICustomQuestionController {
@@ -27,6 +29,18 @@ public class CustomQuestionController implements ICustomQuestionController {
 	public CustomQuestionDto nextQuestion(@RequestParam("username") String username, 
 			@RequestParam("cont") int contQuestion) {
 		return management.nextCustomQuestion(username, contQuestion);
+	}
+
+	@RequestMapping("/voteQuestion")
+	@Override
+	public void voteQuestion(@RequestBody VoteQuestionDto dto) {
+		management.voteCustomQuestion(dto);
+	}
+	
+	@RequestMapping("/responseQuestion")
+	@Override
+	public void responseQuestion(@RequestBody ResponseQuestionDto dto) {
+		management.responseCustomQuestion(dto);
 	}
 
 }
