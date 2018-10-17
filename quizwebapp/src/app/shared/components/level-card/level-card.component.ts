@@ -11,14 +11,14 @@ import {SectionsService } from '../../../history/services/sections.service'
 export class LevelCardComponent implements OnInit {
   NAME_BADGE: string = "badge badge-"; 
 
-  @Input() level:Level = new Level();
+  @Input() level: Level = new Level();
 
-  classBadge:string;
-  msgBadge:string;
-  opacity:number = 1;
+  classBadge: string;
+  msgBadge: string;
+  opacity: number = 1;
   disabledButton:boolean;
 
-  constructor(private router:Router, private sectionsService: SectionsService) { }
+  constructor(private router: Router, private sectionsService: SectionsService) { }
 
   ngOnInit() {
     this.createBadge();
@@ -26,7 +26,7 @@ export class LevelCardComponent implements OnInit {
 
   playLevel() {
     this.sectionsService.setCurrentLevel(this.level);
-    this.router.navigate( ['/level', this.level.codLevel] );
+     
   }
 
   createBadge() {

@@ -2,6 +2,7 @@ package com.uniovi.quizapp.service.dto.customQuestion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uniovi.quizapp.dataacess.model.question.Question;
+import com.uniovi.quizapp.dataacess.model.question.StateQuestion;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomQuestionDto {
@@ -9,6 +10,7 @@ public class CustomQuestionDto {
 	private String id;
 	private String username;
 	private Question question;
+	private StateQuestion state;
 	
 	public String getUsername() {
 		return username;
@@ -27,6 +29,12 @@ public class CustomQuestionDto {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public StateQuestion getState() {
+		return state;
+	}
+	public void setState(StateQuestion state) {
+		this.state = state;
 	}
 	
 	

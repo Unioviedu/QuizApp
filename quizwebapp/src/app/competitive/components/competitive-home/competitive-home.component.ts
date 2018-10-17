@@ -17,4 +17,8 @@ export class CompetitiveHomeComponent implements OnInit {
     this.router.navigate( ['/createQuestion'] );
   }
 
+  play() {
+    this.router.navigate( ['/playQuestion'] );
+  }
+
 }

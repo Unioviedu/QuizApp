@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-navbar',
@@ -6,12 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('navbar') navBar;
 
-  constructor() {
-    
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
+  }
+
+  goComponent(component: string) {
+    this.router.navigate( [component] );
+
+    jQuery(this.navBar.nativeElement).collapse('hide');
   }
 
 }

@@ -49,10 +49,11 @@ export class LevelComponent implements AfterViewInit, OnInit {
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent(componentFactory);
-    (<any>componentRef.instance).data = qDuo.data;
-
-    <any>componentRef.instance.responseQuestionEvent.subscribe(($event) => this.responseQuestion($event));
-    <any>componentRef.instance.nextQuestionEvent.subscribe(($event) => this.nextQuestion($event));
+    const componentInstance = <any>componentRef.instance;
+    
+    componentInstance.data = qDuo.data;
+    componentInstance.responseQuestionEvent.subscribe(($event) => this.responseQuestion($event));
+    componentInstance.nextQuestionEvent.subscribe(($event) => this.nextQuestion($event));
   }
 
   responseQuestion(isCorrect: boolean) {
@@ -63,8 +64,9 @@ export class LevelComponent implements AfterViewInit, OnInit {
       this.progressCorrect = percentajeCorrect.toString() + '%';
     } else {
       this.incorrectQuestion++;
-      this.alertType = "incorrect";
-      let percentajeIncorrect = (this.incorrectQuestion / this.questions) * 100;
+      this.alertType = 'incorrect';
+
+      const percentajeIncorrect = (this.incorrectQuestion / this.questions) * 100;
       this.progressIncorrect = percentajeIncorrect.toString() + '%';
     }
   }
@@ -72,7 +74,7 @@ export class LevelComponent implements AfterViewInit, OnInit {
   nextQuestion(isLast: boolean) {
     if (isLast) {
       this.sectionService.responseLevel(this.correctQuestion, this.incorrectQuestion).subscribe((data) => {
-        let codSection = this.sectionService.getCurrentLevel().codSection;
+        const codSection = this.sectionService.getCurrentLevel().codSection;
         this.sectionService.changeInfo(data);
         this.router.navigate(['/section', codSection]);
       }
