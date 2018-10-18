@@ -26,7 +26,7 @@ export class LevelCardComponent implements OnInit {
 
   playLevel() {
     this.sectionsService.setCurrentLevel(this.level);
-     
+    this.router.navigate( ['/level', this.level.codLevel] );
   }
 
   createBadge() {

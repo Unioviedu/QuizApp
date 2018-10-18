@@ -18,7 +18,7 @@ export class SectionCardComponent implements OnInit {
   opacity:number = 1;
   disabledButton:boolean;
 
-  constructor(private router:Router, private sectionService: SectionsService) {}
+  constructor(private router: Router, private sectionService: SectionsService) {}
 
   ngOnInit() {
     this.createBadge();

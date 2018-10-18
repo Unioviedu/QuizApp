@@ -3,6 +3,8 @@ package com.uniovi.quizapp.dataacess.dao.impl;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.ICustomQuestionDao;
@@ -40,5 +42,36 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 				.field("state").equal(StateQuestion.ACCEPT)
 				.asList();
 	}
+
+	@Override
+	public void voteQuestion(ObjectId id, boolean vote) {
+		String field = vote ? "positivesVote" : "negativesVote";
+		
+		Query<CustomQuestion> query = datastore
+				.createQuery(getEntityClass())
+				.field("id").equal(id);
+		
+		UpdateOperations<CustomQuestion> operations = datastore
+				.createUpdateOperations(getEntityClass())
+				.inc(field);
+		
+		datastore.update(query, operations);
+	}
+
+	@Override
+	public void changeState(ObjectId id, StateQuestion state) {
+		Query<CustomQuestion> query = datastore
+				.createQuery(getEntityClass())
+				.field("id").equal(id);
+		
+		UpdateOperations<CustomQuestion> operations = datastore
+				.createUpdateOperations(getEntityClass())
+				.set("state", state);
+		
+		datastore.update(query, operations);
+		
+	}
+	
+	
 
 }

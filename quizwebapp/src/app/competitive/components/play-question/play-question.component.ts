@@ -74,6 +74,12 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
 
   voteQuestion(vote: boolean) {
     console.log(vote);
+    const voteObj = {
+      'idQuestion': this.currentQuestion.id,
+      'vote': vote
+    };
+    this.service.voteQuestion(voteObj).subscribe();
+
     this.loadNextQuestion();
   }
 

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,8 +56,7 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 
 	@Override
 	public void voteCustomQuestion(VoteQuestionDto dto) {
-		// TODO Auto-generated method stub
-		
+		this.questionDao.voteQuestion(new ObjectId(dto.getIdQuestion()), dto.isVote());
 	}
 
 	@Override

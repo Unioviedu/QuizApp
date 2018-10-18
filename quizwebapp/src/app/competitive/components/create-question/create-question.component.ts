@@ -29,8 +29,11 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   continue() {
-    this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['/createQuestion']));
+    this.router
+      .navigateByUrl('/RefrshComponent', {skipLocationChange: true})
+      .then(() =>
+          this.router.navigate(['/createQuestion'])
+      );
   }
 
   exit() {

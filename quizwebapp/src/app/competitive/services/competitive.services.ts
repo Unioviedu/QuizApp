@@ -24,6 +24,10 @@ export class CompetitiveService {
     return this.http.post<any>(`${this.url}/newQuestion`, customQuestion);
   }
 
+  voteQuestion(vote: any) {
+    return this.http.post<any>(`${this.url}/voteQuestion`, vote);
+  }
+
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser')).username;
   }
