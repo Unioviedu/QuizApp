@@ -16,7 +16,7 @@ public interface ICustomQuestionDao extends IDaoGeneric<CustomQuestion, ObjectId
 
 	public List<CustomQuestion> findQuestionForPlay(String username);
 	
-	public void voteQuestion(ObjectId id, boolean vote);
+	public CustomQuestion voteQuestion(ObjectId id, boolean vote);
 	
 	public void changeState(ObjectId id, StateQuestion state);
 

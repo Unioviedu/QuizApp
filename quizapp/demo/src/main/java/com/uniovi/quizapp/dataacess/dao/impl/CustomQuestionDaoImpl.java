@@ -44,7 +44,7 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 	}
 
 	@Override
-	public void voteQuestion(ObjectId id, boolean vote) {
+	public CustomQuestion voteQuestion(ObjectId id, boolean vote) {
 		String field = vote ? "positivesVote" : "negativesVote";
 		
 		Query<CustomQuestion> query = datastore
@@ -56,6 +56,7 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 				.inc(field);
 		
 		datastore.update(query, operations);
+		return query.get();
 	}
 
 	@Override

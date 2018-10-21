@@ -1,5 +1,7 @@
 package com.uniovi.quizapp.service.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,11 @@ public class CustomQuestionController implements ICustomQuestionController {
 	public void responseQuestion(@RequestBody ResponseQuestionDto dto) {
 		management.responseCustomQuestion(dto);
 	}
-
+	
+	@RequestMapping("/questionsByUser")
+	@Override
+	public List<CustomQuestionDto> getQuestionsByUser(@RequestParam("username") String username) {
+		return management.findQuestionsByUser(username);
+	}
+	
 }

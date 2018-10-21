@@ -18,6 +18,10 @@ export class UserService {
 
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('currentUser')).username;
-      }
+    }
+
+    getQuestionByUser() {
+        return this.http.get<any>(`${this.url}/questionsByUser?username=${ this.getCurrentUser()}`);
+    }
 
 }

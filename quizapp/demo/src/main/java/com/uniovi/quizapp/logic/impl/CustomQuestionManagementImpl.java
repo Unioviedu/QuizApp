@@ -22,6 +22,10 @@ import com.uniovi.quizapp.service.dto.customQuestion.VoteQuestionDto;
 @Service
 public class CustomQuestionManagementImpl extends AbstractManagement implements ICustomQuestionManagement {
 	private static int[] numberForVote = {0, 1, 2};
+	private static int minNumVotes = 10;
+	
+	private static double percentajeAccept = 0.8;
+	private static double percentajeDismiss = 0.4;
 	@Autowired
 	private ICustomQuestionDao questionDao;
 	
@@ -56,13 +60,42 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 
 	@Override
 	public void voteCustomQuestion(VoteQuestionDto dto) {
-		this.questionDao.voteQuestion(new ObjectId(dto.getIdQuestion()), dto.isVote());
+		CustomQuestion question = 
+				this.questionDao.voteQuestion(
+						new ObjectId(dto.getIdQuestion()), dto.isVote());
+		
+		calculateState(question);
 	}
 
 	@Override
 	public void responseCustomQuestion(ResponseQuestionDto dto) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void calculateState(CustomQuestion question) {
+		double numVotes = question.getNegativesVote() + question.getPositivesVote();
+		double percentaje = question.getPositivesVote() / numVotes;
+		
+		if (numVotes >= minNumVotes) {
+			if (percentaje > percentajeAccept)
+				this.questionDao.changeState(question.getId(), StateQuestion.ACCEPT);
+			else if (percentaje < percentajeDismiss)
+				this.questionDao.changeState(question.getId(), StateQuestion.DISMISS);
+		}
+	}
+
+	@Override
+	public List<CustomQuestionDto> findQuestionsByUser(String username) {
+		List<CustomQuestion> questions = this.questionDao.findByUser(username);
+		List<CustomQuestionDto> questionsDto = new ArrayList<>();
+		
+		for (CustomQuestion question: questions) {
+			CustomQuestionDto dto = mapper.convertValue(question, CustomQuestionDto.class);
+			questionsDto.add(dto);
+		}
+		
+		return questionsDto;
 	}
 	
 	

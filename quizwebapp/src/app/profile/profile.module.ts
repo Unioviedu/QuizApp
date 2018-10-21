@@ -6,6 +6,7 @@ import { routing } from './profile.routing'
 import { ProfileComponent } from './components/profile/profile.component';
 import { RankLevelComponent } from './components/rank-level/rank-level.component';
 import { SharedModule } from '../shared/shared.module';
+import { CustomQuestionsComponent } from './components/custom-questions/custom-questions.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule
   ],
-  declarations: [ProfileComponent, RankLevelComponent]
+  declarations: [ProfileComponent, RankLevelComponent, CustomQuestionsComponent]
 })
 export class ProfileModule { }
