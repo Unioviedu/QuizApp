@@ -4,7 +4,6 @@ import { SectionsService } from '../../services/sections.service';
 
 import { Section } from '../../model/section.model';
 import { Level } from '../../model/level.model';
-import { Challange } from '../../model/challange.model';
 
 declare var jQuery: any;
 
@@ -26,6 +25,7 @@ export class SectionComponent implements OnInit {
   sectionsUnlock: string[] = [];
   challangesComplete: string[] = [];
   trophiesComplete: string[] = [];
+  newRank: string;
 
   constructor(private activatedRoute: ActivatedRoute,
     private sectionsService: SectionsService) {
@@ -45,6 +45,7 @@ export class SectionComponent implements OnInit {
       this.sectionsUnlock = newInfo.sectionsUnlock;
       this.challangesComplete = newInfo.challangesComplete;
       this.trophiesComplete = newInfo.trophiesComplete;
+      this.newRank = newInfo.newRank;
 
       jQuery(this.myModal.nativeElement).modal('show');
       this.sectionsService.changeInfo(null);

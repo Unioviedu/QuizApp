@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uniovi.quizapp.logic.api.ILevelManagement;
 import com.uniovi.quizapp.service.api.ILevelController;
-import com.uniovi.quizapp.service.dto.level.ResponseLevelDto;
+import com.uniovi.quizapp.service.dto.UserInfoDto;
 import com.uniovi.quizapp.service.dto.level.ResultLevelDto;
 
 @RestController
@@ -17,7 +17,7 @@ public class LevelController implements ILevelController {
 	private ILevelManagement levelManagement;
 	
 	@RequestMapping("/responseLevel")
-	public ResponseLevelDto responseLevel(@RequestBody ResultLevelDto rl) {
+	public UserInfoDto responseLevel(@RequestBody ResultLevelDto rl) {
 		return levelManagement.responseLevel(rl);
 	}
 

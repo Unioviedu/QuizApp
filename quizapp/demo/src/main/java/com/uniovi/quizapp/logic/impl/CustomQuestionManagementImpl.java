@@ -11,10 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.ICustomQuestionDao;
+import com.uniovi.quizapp.dataacess.dao.api.ILevelRankDao;
+import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
 import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
 import com.uniovi.quizapp.dataacess.model.question.StateQuestion;
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.api.ICustomQuestionManagement;
 import com.uniovi.quizapp.logic.general.AbstractManagement;
+import com.uniovi.quizapp.logic.general.CheckUserInfo;
+import com.uniovi.quizapp.service.dto.UserInfoDto;
 import com.uniovi.quizapp.service.dto.customQuestion.CustomQuestionDto;
 import com.uniovi.quizapp.service.dto.customQuestion.ResponseQuestionDto;
 import com.uniovi.quizapp.service.dto.customQuestion.VoteQuestionDto;
@@ -26,8 +32,14 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 	
 	private static double percentajeAccept = 0.8;
 	private static double percentajeDismiss = 0.4;
+	
 	@Autowired
 	private ICustomQuestionDao questionDao;
+	@Autowired
+	private IUserDao userDao;
+	@Autowired
+	private ILevelRankDao levelRankDao;
+	
 	
 	@Override
 	public void newCustomQuestion(CustomQuestionDto dto) {
@@ -68,9 +80,18 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 	}
 
 	@Override
-	public void responseCustomQuestion(ResponseQuestionDto dto) {
-		// TODO Auto-generated method stub
+	public UserInfoDto responseCustomQuestion(ResponseQuestionDto dto) {
+		CheckUserInfo info = new CheckUserInfo();
+		User user = userDao.findByUsername(dto.getUsername());
 		
+		user = info.checkChallangesTrophy(user);
+		user = info.checkLevelRank(user, getCurrentLevelRank(user));
+		
+		return info.getResponse();
+	}
+	
+	private LevelRank getCurrentLevelRank(User user) {
+		return levelRankDao.findByExp(user.getExperience());
 	}
 	
 	private void calculateState(CustomQuestion question) {

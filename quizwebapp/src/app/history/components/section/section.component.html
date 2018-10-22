@@ -48,6 +48,10 @@
             </div>
             <div class="modal-body">
 
+                <div *ngIf="newRank" class="alert alert-success">
+                    <h6>New RankLevel:</h6> {{newRank.name}}
+                </div>
+
                 <div *ngIf="levelsUnlock.length > 0" class="alert alert-warning">
                     <h6>Levels unlocked</h6>
                     <ul>

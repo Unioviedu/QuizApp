@@ -1,16 +1,18 @@
-package com.uniovi.quizapp.service.dto.level;
+package com.uniovi.quizapp.service.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 
-public class ResponseLevelDto {
+public class UserInfoDto {
 	
 	private List<String> levelsUnlock = new ArrayList<>();
 	private List<String> sectionsUnlock = new ArrayList<>();
 	private List<ResultChallange> challangesComplete = new ArrayList<>();
 	private List<ResultChallange> trophiesComplete = new ArrayList<>();
+	private LevelRank newRank;
 	private int newExp;
 	
 	public List<String> getLevelsUnlock() {
@@ -61,6 +63,12 @@ public class ResponseLevelDto {
 	}
 	public void setTrophiesComplete(List<ResultChallange> trophiesComplete) {
 		this.trophiesComplete = trophiesComplete;
+	}
+	public LevelRank getNewRank() {
+		return newRank;
+	}
+	public void setNewRank(LevelRank newRank) {
+		this.newRank = newRank;
 	}
 	
 	
