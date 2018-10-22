@@ -28,6 +28,16 @@ export class CompetitiveService {
     return this.http.post<any>(`${this.url}/voteQuestion`, vote);
   }
 
+  responseQuestion(idQuestion: string, isCorrect: boolean) {
+    const responseQuestion: any = {
+      'username': this.getCurrentUser(),
+      'idQuestion': idQuestion,
+      'isCorrect': isCorrect
+    };
+
+    return this.http.post<any>(`${this.url}/responseQuestion`, responseQuestion);
+  }
+
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser')).username;
   }

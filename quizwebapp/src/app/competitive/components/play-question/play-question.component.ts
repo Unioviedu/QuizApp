@@ -19,6 +19,8 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   isForVote: boolean;
   alertType = '';
 
+  newInfo: any = {};
+
   constructor(private service: CompetitiveService,
     private cdr: ChangeDetectorRef,
     private componentFactoryResolver: ComponentFactoryResolver) { }
@@ -57,6 +59,20 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   }
 
   responseQuestion(isCorrect: boolean) {
+    if (this.currentQuestion.state !== 'ACCEPT') {
+      this.lauchAlertSimple(isCorrect);
+      return;
+    }
+
+    this.service.responseQuestion(this.currentQuestion.id, isCorrect).subscribe(
+      response => {
+        console.log(response.newExp);
+        this.newInfo = response;
+      }
+    );
+  }
+
+  lauchAlertSimple(isCorrect: boolean) {
     if (isCorrect) {
       this.alertType = 'correct';
     } else {
@@ -84,9 +100,11 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   }
 
   loadNextQuestion() {
+    this.cont++;
     this.getQuestion();
     this.loadQuestion();
     this.alertType = null;
+    this.newInfo = null;
   }
 
 }

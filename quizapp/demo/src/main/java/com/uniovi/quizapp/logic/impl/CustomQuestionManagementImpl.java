@@ -86,6 +86,7 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 		
 		user = info.checkChallangesTrophy(user);
 		user = info.checkLevelRank(user, getCurrentLevelRank(user));
+		info.getResponse().setNewExp(20);
 		
 		return info.getResponse();
 	}
