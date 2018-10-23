@@ -72,6 +72,22 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 		datastore.update(query, operations);
 		
 	}
+
+	@Override
+	public CustomQuestion responseQuestion(ObjectId id, boolean response) {
+		String field = response ? "positivesResponse" : "negativesResponse";
+		
+		Query<CustomQuestion> query = datastore
+				.createQuery(getEntityClass())
+				.field("id").equal(id);
+		
+		UpdateOperations<CustomQuestion> operations = datastore
+				.createUpdateOperations(getEntityClass())
+				.inc(field);
+		datastore.update(query, operations);
+		
+		return query.get();
+	}
 	
 	
 

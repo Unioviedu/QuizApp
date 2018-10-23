@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
 import com.uniovi.quizapp.dataacess.model.user.LevelRank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
@@ -53,6 +54,21 @@ public class CheckUserInfo {
 		user.sumExp(exp);
 		response.addExp(exp);
 
+		return user;
+	}
+	
+	public User checkResponseCustomQuestion(User user, CustomQuestion question, boolean isCorrect) {
+		int exp;
+		
+		if (isCorrect) {
+			exp = 20;
+		} else {
+			exp = -20;
+		}
+		
+		user.sumExp(exp);
+		response.setNewExp(exp);
+		
 		return user;
 	}
 	

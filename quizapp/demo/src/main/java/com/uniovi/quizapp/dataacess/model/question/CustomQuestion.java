@@ -7,6 +7,10 @@ public class CustomQuestion extends DefaultEntity {
 	private String username;
 	private Question question;
 	private StateQuestion state;
+	
+	private int positivesResponse;
+	private int negativesResponse;
+	
 	private int positivesVote;
 	private int negativesVote;
 	
@@ -39,6 +43,18 @@ public class CustomQuestion extends DefaultEntity {
 	}
 	public void setNegativesVote(int negativesVote) {
 		this.negativesVote = negativesVote;
+	}
+	public int getPositivesResponse() {
+		return positivesResponse;
+	}
+	public void setPositivesResponse(int positivesResponse) {
+		this.positivesResponse = positivesResponse;
+	}
+	public int getNegativesResponse() {
+		return negativesResponse;
+	}
+	public void setNegativesResponse(int negativesResponse) {
+		this.negativesResponse = negativesResponse;
 	}
 	
 	

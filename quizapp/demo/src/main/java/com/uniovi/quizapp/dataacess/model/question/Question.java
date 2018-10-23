@@ -1,10 +1,7 @@
 package com.uniovi.quizapp.dataacess.model.question;
 
-import org.mongodb.morphia.annotations.Entity;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME, 
@@ -15,8 +12,7 @@ import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 	@JsonSubTypes.Type(value = QuestionOptions.class, name = "option"),
 	@JsonSubTypes.Type(value = QuestionCodeBlock.class, name = "codeBlock")
 })
-@Entity
-public abstract class Question extends DefaultEntity {
+public abstract class Question {
 	private String title;
 	private String type;
 	private String statement;

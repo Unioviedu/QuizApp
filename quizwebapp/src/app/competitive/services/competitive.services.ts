@@ -32,7 +32,7 @@ export class CompetitiveService {
     const responseQuestion: any = {
       'username': this.getCurrentUser(),
       'idQuestion': idQuestion,
-      'isCorrect': isCorrect
+      'correct': isCorrect
     };
 
     return this.http.post<any>(`${this.url}/responseQuestion`, responseQuestion);

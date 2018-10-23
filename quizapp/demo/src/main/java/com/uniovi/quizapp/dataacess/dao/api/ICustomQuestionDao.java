@@ -18,6 +18,8 @@ public interface ICustomQuestionDao extends IDaoGeneric<CustomQuestion, ObjectId
 	
 	public CustomQuestion voteQuestion(ObjectId id, boolean vote);
 	
+	public CustomQuestion responseQuestion(ObjectId id, boolean response);
+	
 	public void changeState(ObjectId id, StateQuestion state);
 
 }

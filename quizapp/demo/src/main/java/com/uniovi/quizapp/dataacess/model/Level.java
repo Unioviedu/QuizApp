@@ -6,13 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Entity;
 
-import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 import com.uniovi.quizapp.dataacess.model.question.Question;
 
-@Entity
-public class Level extends DefaultEntity {
+public class Level {
 	
 	private String codSection;
 	private String codLevel;

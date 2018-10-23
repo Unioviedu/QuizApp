@@ -83,12 +83,19 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 	public UserInfoDto responseCustomQuestion(ResponseQuestionDto dto) {
 		CheckUserInfo info = new CheckUserInfo();
 		User user = userDao.findByUsername(dto.getUsername());
+		CustomQuestion question = questionDao.find(new ObjectId( dto.getIdQuestion() ));
 		
+		user = info.checkResponseCustomQuestion(user, question, dto.isCorrect());
 		user = info.checkChallangesTrophy(user);
 		user = info.checkLevelRank(user, getCurrentLevelRank(user));
-		info.getResponse().setNewExp(20);
+		
+		this.checkCustomQuestion(question, dto.isCorrect());
 		
 		return info.getResponse();
+	}
+	
+	private void checkCustomQuestion(CustomQuestion question, boolean isCorrect) {
+		this.questionDao.responseQuestion(question.getId(), isCorrect);
 	}
 	
 	private LevelRank getCurrentLevelRank(User user) {

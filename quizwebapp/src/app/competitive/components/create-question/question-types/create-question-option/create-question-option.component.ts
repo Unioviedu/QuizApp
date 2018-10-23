@@ -14,11 +14,13 @@ export class CreateQuestionOptionComponent implements OnInit {
   options: any = ['option1'];
   index = 1;
 
+  submitted: boolean;
+
   constructor(private formBuilder: FormBuilder) {
 
     this.questionForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      statement: ['', [Validators.required, Validators.email]]
+      statement: ['', [Validators.required]]
       });
 
       this.optionsForm = this.createForm();
@@ -53,6 +55,12 @@ export class CreateQuestionOptionComponent implements OnInit {
   }
 
   save() {
+    this.submitted = true;
+
+    if (this.questionForm.invalid) {
+      return;
+    }
+
     const questionForm = this.questionForm.controls;
     const optionsForm = this.optionsForm.controls;
 
@@ -77,6 +85,10 @@ export class CreateQuestionOptionComponent implements OnInit {
     };
 
     this.newQuestionEvent.emit(newQuestion);
+  }
+
+  get q() {
+    return this.questionForm.controls;
   }
 
 }

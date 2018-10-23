@@ -26,6 +26,8 @@
             </div>
             <div class="question">
                 <ng-template app-question></ng-template>
+                <hr>
+                <button *ngIf="exitButton" [routerLink]="['/competitive']" type="button" class="btn btn-danger btn-lg btn-block">Exit</button>
             </div>
 
         </div>
@@ -63,8 +65,16 @@
             </div>
             <div class="modal-body">
 
-                <div class="alert alert-success">
-                    <h6>Bonification:</h6> {{newInfo.newExp}} exp
+                <div *ngIf="newInfo.newRank" class="alert alert-success">
+                    <h6>New RankLevel:</h6> {{newInfo.newRank.name}}
+                </div>
+
+                <div *ngIf="newInfo.newExp >= 0" class="alert alert-success">
+                    <h6>Correct - Bonification:</h6> {{newInfo.newExp}} exp
+                </div>
+
+                <div *ngIf="newInfo.newExp < 0" class="alert alert-danger">
+                    <h6>Incorrect - Bonification:</h6> {{newInfo.newExp}} exp
                 </div>
 
             </div>

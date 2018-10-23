@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { QuestionDirective } from './directives/question.directive';
 import { CompetitiveService } from '../../services/competitive.services';
+import { InfoUser } from 'src/app/shared/model/info-user.model';
 
 declare var jQuery: any;
 
@@ -12,14 +13,16 @@ declare var jQuery: any;
 export class PlayQuestionComponent implements AfterViewInit, OnInit {
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
   @ViewChild('modalVote') modalVote;
+  @ViewChild('modalResponse') modalResponse;
 
   cont = 0;
   currentQuestion: any;
 
   isForVote: boolean;
   alertType = '';
+  exitButton: boolean;
 
-  newInfo: any = {};
+  newInfo: InfoUser = new InfoUser(undefined);
 
   constructor(private service: CompetitiveService,
     private cdr: ChangeDetectorRef,
@@ -59,6 +62,8 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   }
 
   responseQuestion(isCorrect: boolean) {
+    this.exitButton = true;
+    
     if (this.currentQuestion.state !== 'ACCEPT') {
       this.lauchAlertSimple(isCorrect);
       return;
@@ -66,8 +71,8 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
 
     this.service.responseQuestion(this.currentQuestion.id, isCorrect).subscribe(
       response => {
-        console.log(response.newExp);
-        this.newInfo = response;
+        this.newInfo = new InfoUser(response);
+        jQuery(this.modalResponse.nativeElement).modal('show');
       }
     );
   }
@@ -89,7 +94,6 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   }
 
   voteQuestion(vote: boolean) {
-    console.log(vote);
     const voteObj = {
       'idQuestion': this.currentQuestion.id,
       'vote': vote
@@ -104,7 +108,8 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
     this.getQuestion();
     this.loadQuestion();
     this.alertType = null;
-    this.newInfo = null;
+    this.exitButton = false;
+    this.newInfo = new InfoUser(undefined);
   }
 
 }

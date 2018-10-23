@@ -33,5 +33,7 @@ public class LevelRank extends DefaultEntity{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+
 
 }
