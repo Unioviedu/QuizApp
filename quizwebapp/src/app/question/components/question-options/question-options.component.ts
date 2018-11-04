@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-question-options',
   templateUrl: './question-options.component.html',
   styleUrls: ['./question-options.component.css']
 })
-export class QuestionOptionsComponent implements OnInit {
+export class QuestionOptionsComponent implements OnInit{
   OPTION_CLASS: string = "list-group-item list-group-item-action";
   OPTION_CLASS_ACTIVE: string = "list-group-item list-group-item-action active";
 
@@ -19,8 +19,8 @@ export class QuestionOptionsComponent implements OnInit {
   cont: number = 0;
   optionsSelected: number = 0;
   options: any[] = [];
-  isResponse:boolean = false;
-  nameButton:string = "Qualify";
+  isResponse: boolean = false;
+  nameButton: string = "Qualify";
 
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
@@ -87,7 +87,7 @@ export class QuestionOptionsComponent implements OnInit {
       this.nextQuestion();
       return;
     }
-    
+
     let isCorrect = true;
     for (let option of this.options) {
       if (option.correct != option.selected) {
@@ -99,7 +99,7 @@ export class QuestionOptionsComponent implements OnInit {
     this.responseQuestionEvent.emit(isCorrect);
     this.markQuestion(isCorrect);
     this.isResponse = true;
-    
+
     this.nameButton = this.data.isLast ? "Finalize" : "Next question";
   }
 
@@ -107,7 +107,7 @@ export class QuestionOptionsComponent implements OnInit {
     this.nextQuestionEvent.emit(this.data.isLast);
   }
 
-  markQuestion(isCorrect:boolean) {
+  markQuestion(isCorrect: boolean) {
     for (let option of this.options) {
       if (option.correct)
         option.classOption = isCorrect ? this.OPTION_CLASS_CORRECT : this.OPTION_CLASS_INCORRECT;

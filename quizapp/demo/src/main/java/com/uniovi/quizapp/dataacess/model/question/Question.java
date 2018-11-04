@@ -16,6 +16,8 @@ public abstract class Question {
 	private String title;
 	private String type;
 	private String statement;
+	private String codeBlock;
+	private String programmingLanguage;
 	
 	public Question() {}
 
@@ -48,6 +50,19 @@ public abstract class Question {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCodeBlock() {
+		return codeBlock;
+	}
+
+	public void setCodeBlock(String codeBlock, String programmingLanguague) {
+		this.codeBlock = codeBlock;
+		this.programmingLanguage = programmingLanguague;
+	}
+
+	public String getProgrammingLanguage() {
+		return programmingLanguage;
 	}
 	
 	

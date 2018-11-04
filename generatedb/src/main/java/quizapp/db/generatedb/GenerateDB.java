@@ -47,6 +47,9 @@ public class GenerateDB {
 		Option o6 = new Option("Option6", false);
 		
 		QuestionOptions question1 = new QuestionOptions("Question 1", "Primera pregunta");
+		String codeBlock = "var data = 9;\n"
+				+ "data = 8;";
+		question1.setCodeBlock(codeBlock, "javascript");
 		question1.addOptions(o1, o2, o3, o4);
 		
 		QuestionOptions question2 = new QuestionOptions("Question 2", "Segunda pregunta");

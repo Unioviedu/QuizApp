@@ -3,9 +3,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{data.title}}</h5>
-                <p class="card-text">{{data.statement}}
-                    <br>
-                    <code>&lt;h1 class=".title"&gt; &lt;h1&gt;</code> </p>
+                <p class="card-text">
+                    {{data.statement}}
+                </p>
+                <textarea *ngIf="data.codeBlock" highlight-js [lang]="data.programmingLanguage" [ngModel]="data.codeBlock"></textarea>
             </div>
             <div class="card-footer text-muted text-center">
                 Respuestas correctas {{cont}}
