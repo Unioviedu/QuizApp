@@ -6,5 +6,6 @@ public interface IUserController {
 	
 	public UserDto getUser(String username);
 	public UserDto register(UserDto userDto);
+	public boolean isUniqueUsername(String username);
 
 }

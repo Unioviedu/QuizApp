@@ -3,6 +3,9 @@ import { QuestionDirective } from './directives/question.directive';
 import { SectionsService } from '../../services/sections.service';
 import { QuestionDuo } from '../../../question/model/question-duo';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { InfoUser } from '../../../shared/model/info-user.model';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-level',
@@ -10,6 +13,7 @@ import { Router } from '../../../../../node_modules/@angular/router';
   styleUrls: ['./level.component.css']
 })
 export class LevelComponent implements AfterViewInit, OnInit {
+  @ViewChild('myModal') myModal;
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
   index = 0;
   qDuos: QuestionDuo[];
@@ -20,6 +24,8 @@ export class LevelComponent implements AfterViewInit, OnInit {
   incorrectQuestion = 0;
   progressCorrect = '0%';
   progressIncorrect = '0%';
+
+  newInfo: InfoUser = new InfoUser(undefined);
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private cdr: ChangeDetectorRef,
@@ -73,17 +79,23 @@ export class LevelComponent implements AfterViewInit, OnInit {
 
   nextQuestion(isLast: boolean) {
     if (isLast) {
-      this.sectionService.responseLevel(this.correctQuestion, this.incorrectQuestion).subscribe((data) => {
-        const codSection = this.sectionService.getCurrentLevel().codSection;
-        this.sectionService.changeInfo(data);
-        this.router.navigate(['/section', codSection]);
-      }
+      this.sectionService.responseLevel(this.correctQuestion, this.incorrectQuestion)
+        .subscribe((data) => {
+          this.newInfo = data;
+          jQuery(this.myModal.nativeElement).modal('show');
+        }
       );
     } else {
       this.index++;
       this.alertType = null;
       this.loadQuestion();
     }
+  }
+
+  backSections() {
+    const codSection = this.sectionService.getCurrentLevel().codSection;
+    this.router.navigate(['/section', codSection]);
+    jQuery(this.myModal.nativeElement).modal('hide');
   }
 
 }

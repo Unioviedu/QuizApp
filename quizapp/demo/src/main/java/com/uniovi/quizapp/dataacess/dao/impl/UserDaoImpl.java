@@ -1,5 +1,7 @@
 package com.uniovi.quizapp.dataacess.dao.impl;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,8 @@ import com.uniovi.quizapp.dataacess.model.user.User;
 public class UserDaoImpl extends IDaoGenericImpl<User, ObjectId> implements IUserDao {
 	
 	public User findByUsername(String username) {
-		return findByField("username", username).get(0);
+		List<User> users = findByField("username", username);
+		return !users.isEmpty() ? users.get(0) : null;
 	}
 
 	@Override

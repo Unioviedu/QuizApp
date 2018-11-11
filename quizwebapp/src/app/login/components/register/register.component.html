@@ -16,12 +16,13 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
-          <input type="text" formControlName="username" class="form-control" placeholder="Username" aria-label="Username"
+          <input #username (blur)="checkUniqueUsername(username.value)" (keyup)="checkUniqueUsername(username.value)" type="text" formControlName="username" class="form-control" placeholder="Username" aria-label="Username"
             aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': (f.username.touched || submitted ) && f.username.errors }">
           <div *ngIf="(f.username.touched || submitted ) && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-            <div *ngIf="f.username.errors.minlength">Min length 4</div>
-            <div *ngIf="f.username.errors.maxlength">Max length 16</div>
+            <div *ngIf="f.username.errors.required">El nombre de usuario es obligatorio.</div>
+            <div *ngIf="f.username.errors.minlength">Mínimo 4 caracteres</div>
+            <div *ngIf="f.username.errors.maxlength">Máximo 16 caracteres</div>
+            <div *ngIf="f.username.errors.repeat">Nombre de usuario repetido</div>
           </div>
         </div>
 
@@ -59,7 +60,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="register()">Register</button>
+      <button type="button" class="btn btn-primary" (click)="register()">Register</button>
     </div>
   </div>
 </div>

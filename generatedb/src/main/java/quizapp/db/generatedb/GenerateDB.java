@@ -2,20 +2,22 @@ package quizapp.db.generatedb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
-import com.uniovi.quizapp.dataacess.model.Level;
-import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
 import com.uniovi.quizapp.dataacess.model.challange.ChallangeSection;
 import com.uniovi.quizapp.dataacess.model.challange.ChallangeTrophy;
+import com.uniovi.quizapp.dataacess.model.formattedText.FormattedText;
+import com.uniovi.quizapp.dataacess.model.history.Level;
+import com.uniovi.quizapp.dataacess.model.history.Section;
 import com.uniovi.quizapp.dataacess.model.question.Option;
 import com.uniovi.quizapp.dataacess.model.question.QuestionCodeBlock;
 import com.uniovi.quizapp.dataacess.model.question.QuestionOptions;
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.general.ChallangeFunction;
 import com.uniovi.quizapp.logic.general.TrophyFunction;
@@ -24,7 +26,7 @@ public class GenerateDB {
 	
 	List<Challange> challanges = new ArrayList<>();
 	List<Challange> trophies = new ArrayList<>();
-	List<LevelRank> levelsRank = new ArrayList<>();
+	List<Rank> levelsRank = new ArrayList<>();
 	List<Section> sections = new ArrayList<>();
 	User user;
 	
@@ -46,61 +48,74 @@ public class GenerateDB {
 		Option o5 = new Option("Option5", false);
 		Option o6 = new Option("Option6", false);
 		
-		QuestionOptions question1 = new QuestionOptions("Question 1", "Primera pregunta");
-		String codeBlock = "var data = 9;\n"
-				+ "data = 8;";
-		question1.setCodeBlock(codeBlock, "javascript");
+		FormattedText statement1 = new FormattedText();
+		statement1.addTextSection("Primera pregunta");
+		statement1.addCodeSection("var data = 9;\n"
+				+ "data = 8;", "javascript");
+		QuestionOptions question1 = new QuestionOptions("Question 1", statement1);
 		question1.addOptions(o1, o2, o3, o4);
 		
-		QuestionOptions question2 = new QuestionOptions("Question 2", "Segunda pregunta");
+		QuestionOptions question2 = new QuestionOptions("Question 2", new FormattedText("Segunda pregunta"));
 		question2.addOptions(o1, o2, o3, o4, o5, o6);
 		
-		QuestionCodeBlock question3 = new QuestionCodeBlock("Question 3", "Forma un elemento de encabezado correcto");
+		QuestionCodeBlock question3 = new QuestionCodeBlock("Question 3", new FormattedText("Forma un elemento de encabezado correcto"));
 		question3.setCodeBlocksOptions(new String [] { "<h1>", "<h2>", "<p>", "</h1>" });
 		question3.setCodeBlocksCorrect(new String[] { "<h1>", "</h1>" });
 		
-		Level l11 = new Level("1_1", true, "Level 1", 100);
+		Level l11 = new Level(true, "Level 1", 100);
 		l11.addQuestions(question1, question2);
-		Level l12 = new Level("1_2", true, "Level 2", 200);
+		Level l12 = new Level(true, "Level 2", 200);
 		l12.addQuestions(question1, question3);
-		Level l13 = new Level("1_3", false, "Level 3", 150);
+		Level l13 = new Level(false, "Level 3", 150);
 		l13.addQuestions(question1);
 		
 		l11.addNextLevels(l12, l13);
 		
-		Section s1 = new Section("1", "Introducción", "Esta es una sección de introducción");
+		FormattedText documentation = new FormattedText();
+		documentation.addHeader("Introducción", 2);
+		documentation.addTextSection("Esto es el principio de la documentacion");
+		documentation.addCodeSection("<h1></h1>\n"
+				+ "<p>Parrafo</p>", "html");
+		documentation.addSeparator();
+		documentation.addTextSection("Final de la documentacion");
+		Section s1 = new Section("1", "Introducción", "Esta es una sección de introducción", documentation);
+		datastore.save(s1);
 		s1.addLevels(l11, l12, l13);
 		
-		Level l21 = new Level("2_1", true, "Level 1", 100);
-		Level l22 = new Level("2_2", true, "Level 2", 200);
-		Level l23 = new Level("2_3", false, "Level 3", 150);
+		Level l21 = new Level(true, "Level 1", 100);
+		Level l22 = new Level(true, "Level 2", 200);
+		Level l23 = new Level(false, "Level 3", 150);
 		
-		Section s2 = new Section("2", "Principios básicos", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
+		Section s2 = new Section("2", "Principios básicos", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", documentation);
+		datastore.save(s2);
 		s2.addLevels(l21, l22, l23);
-		s1.addNextSection(s2);
 		
-		Level l31 = new Level("3_1", true, "Level 1", 100);
-		Level l32 = new Level("3_2", true, "Level 2", 100);
-		Level l33 = new Level("3_3", true, "Level 3", 100);
-		Level l34 = new Level("3_4", true, "Level 4", 100);
-		Level l35 = new Level("3_5", false, "Level 5", 100);
-		Level l36 = new Level("3_6", false, "Level 6", 100);
+		Level l31 = new Level(true, "Level 1", 100);
+		Level l32 = new Level(true, "Level 2", 100);
+		Level l33 = new Level(true, "Level 3", 100);
+		Level l34 = new Level(true, "Level 4", 100);
+		Level l35 = new Level(false, "Level 5", 100);
+		Level l36 = new Level(false, "Level 6", 100);
 		
-		Section s3 = new Section("3", "Principios intermedios", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
+		Section s3 = new Section("3", "Principios intermedios", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", documentation);
+		datastore.save(s3);
 		s3.addLevels(l31, l32, l33, l34, l35, l36);
 		
-		Level l41 = new Level("4_1", true, "Level 1", 170);
+		Level l41 = new Level(true, "Level 1", 170);
 		
-		Section s4 = new Section("4", "Principios avanzados", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
+		Section s4 = new Section("4", "Principios avanzados", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", documentation);
+		datastore.save(s4);
 		s4.addLevels(l41);
 		
-		User user = new User("edu", "edu", "edumac710@gmail.com", s1, challanges, trophies, levelsRank.get(0));
-		
-		this.user = user;
 		sections.add(s1);
 		sections.add(s2);
 		sections.add(s3);
 		sections.add(s4);
+		
+		AtomicInteger index = new AtomicInteger();
+		sections.stream().forEach(s -> s.setOrden(index.incrementAndGet()));
+		
+		s1.addNextSection(s2);
 		
 		createTrophies();
 		
@@ -108,13 +123,17 @@ public class GenerateDB {
 		datastore.save(trophies);
 		datastore.save(levelsRank);
 		datastore.save(sections);
+		
+		User user = new User("edu", "edu", "edumac710@gmail.com", s1, challanges, trophies, levelsRank.get(0));
+		this.user = user;
+
 		datastore.save(user);
 	}
 
 	private void createLevelRanks() {
-		LevelRank lr1 = new LevelRank("Noob", 0);
-		LevelRank lr2 = new LevelRank("Intermediate", 100);
-		LevelRank lr3 = new LevelRank("Pro", 300);
+		Rank lr1 = new Rank("Noob", 0);
+		Rank lr2 = new Rank("Intermediate", 100);
+		Rank lr3 = new Rank("Pro", 300);
 		
 		levelsRank.add(lr1);
 		levelsRank.add(lr2);

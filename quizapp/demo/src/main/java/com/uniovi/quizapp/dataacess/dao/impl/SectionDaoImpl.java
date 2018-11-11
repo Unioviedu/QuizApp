@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.general.IDaoGenericImpl;
-import com.uniovi.quizapp.dataacess.model.Section;
+import com.uniovi.quizapp.dataacess.model.history.Section;
 
 @Service
 public class SectionDaoImpl extends IDaoGenericImpl<Section, ObjectId> implements ISectionDao {
@@ -16,16 +16,16 @@ public class SectionDaoImpl extends IDaoGenericImpl<Section, ObjectId> implement
 	}
 
 	@Override
-	public Section findByCod(String codSection) {
-		return findByField("codSection", codSection).get(0);
+	public Section findByCod(Integer codSection) {
+		return findByField("orden", codSection).get(0);
 	}
 
 	@Override
 	public Section findFirstSection() {
 		return datastore
 				.createQuery(getEntityClass())
-				.field("codSection")
-				.equal("1").get();
+				.field("orden")
+				.equal(1).get();
 	}
 
 }

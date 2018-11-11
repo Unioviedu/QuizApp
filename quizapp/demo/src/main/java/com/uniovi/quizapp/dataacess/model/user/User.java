@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.uniovi.quizapp.dataacess.model.Section;
+import org.bson.types.ObjectId;
+
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
+import com.uniovi.quizapp.dataacess.model.history.Section;
 
 public class User extends DefaultEntity {
 	
@@ -17,16 +19,16 @@ public class User extends DefaultEntity {
 	private String mail;
 	
 	private int experience;
-	private LevelRank levelRank;
+	private Rank levelRank;
 	
 	private Set<ResultChallange> resultTrophies = new HashSet<>();
-	private Map<String, ResultSection> resultSections = new HashMap<>();
+	private Map<ObjectId, ResultSection> resultSections = new HashMap<>();
 	
 	public User() {}
 	
 	public User(String username, String password, String mail, Section firstSection, 
 			List<Challange> challanges, List<Challange> trophies,
-			LevelRank firstLevelRank) {
+			Rank firstLevelRank) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -36,7 +38,7 @@ public class User extends DefaultEntity {
 		
 		ResultSection rs1 = new ResultSection(firstSection, challanges);
 		rs1.setUnlocked(true);
-		resultSections.put(firstSection.getCodSection(), rs1);
+		resultSections.put(rs1.getIdSection(), rs1);
 		
 		for (Challange trophy: trophies) {
 			ResultChallange rc = new ResultChallange(trophy);
@@ -60,23 +62,19 @@ public class User extends DefaultEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Map<String, ResultSection> getResultSections() {
-		return resultSections;
-	}
-	public void setResultSections(Map<String, ResultSection> resultSections) {
-		this.resultSections = resultSections;
-	}
 	
 	public void addResultSection (ResultSection rs) {
-		resultSections.put(rs.getCodSection(), rs);
+		resultSections.put(rs.getIdSection(), rs);
 	}
 	
-	public ResultSection getResultSection(String codSection) {
-		return resultSections.get(codSection);
+	public ResultSection getResultSection(ObjectId idSection) {
+		return resultSections.get(idSection); 
 	}
 	
-	public ResultLevel getResultLevel(String codSection, String codLevel) {
-		return resultSections.get(codSection).getResultLevels().get(codLevel);
+	public ResultLevel getResultLevel(ObjectId idSection, ObjectId idLevel) {
+		return getResultSection(idSection)
+				.getResultLevels()
+				.get(idLevel);
 	}
 
 	public int getExperience() {
@@ -87,11 +85,11 @@ public class User extends DefaultEntity {
 		this.experience = experience;
 	}
 
-	public LevelRank getLevelRank() {
+	public Rank getLevelRank() {
 		return levelRank;
 	}
 
-	public void setLevelRank(LevelRank levelRank) {
+	public void setLevelRank(Rank levelRank) {
 		this.levelRank = levelRank;
 	}
 
@@ -109,6 +107,14 @@ public class User extends DefaultEntity {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Map<ObjectId, ResultSection> getResultSections() {
+		return resultSections;
+	}
+
+	public void setResultSections(Map<ObjectId, ResultSection> resultSections) {
+		this.resultSections = resultSections;
 	}
 	
 	

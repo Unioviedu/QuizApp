@@ -3,7 +3,7 @@ package com.uniovi.quizapp.service.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 
 public class UserInfoDto {
@@ -12,7 +12,7 @@ public class UserInfoDto {
 	private List<String> sectionsUnlock = new ArrayList<>();
 	private List<ResultChallange> challangesComplete = new ArrayList<>();
 	private List<ResultChallange> trophiesComplete = new ArrayList<>();
-	private LevelRank newRank;
+	private Rank newRank;
 	private int newExp;
 	
 	public List<String> getLevelsUnlock() {
@@ -64,10 +64,10 @@ public class UserInfoDto {
 	public void setTrophiesComplete(List<ResultChallange> trophiesComplete) {
 		this.trophiesComplete = trophiesComplete;
 	}
-	public LevelRank getNewRank() {
+	public Rank getNewRank() {
 		return newRank;
 	}
-	public void setNewRank(LevelRank newRank) {
+	public void setNewRank(Rank newRank) {
 		this.newRank = newRank;
 	}
 	

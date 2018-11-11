@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,10 @@ import { AuthenticationService } from '../../services/authentication.service'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @Output() close: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('username') usernameInput: ElementRef;
+
   registerForm: FormGroup;
   passwordsForm: FormGroup;
   submitted: boolean;
@@ -29,6 +33,20 @@ export class RegisterComponent implements OnInit {
       }, { validator: [this.passwordConfirmed, this.passFormat] })
 
     });
+  }
+
+  checkUniqueUsername(value: string) {
+    if (this.f.username.errors || !this.f.username.touched) {
+        return;
+    }
+
+    this.authenticationService.isUniqueUsername(value).subscribe(
+      data => {
+        if (!data) {
+          this.f.username.setErrors({repeat: true});
+        }
+      }
+    )
   }
 
   passwordConfirmed(c: AbstractControl): { mismatch: boolean } {
@@ -61,12 +79,13 @@ export class RegisterComponent implements OnInit {
       mail: this.f.mail.value
     };
 
-    this.authenticationService.register(newUser).subscribe( data =>
-      {
-        me.authenticationService.login(data.username, data.password).subscribe(data =>
-          this.router.navigate(['/home'])
-        );
+    this.authenticationService.register(newUser).subscribe(data => {
+      me.authenticationService.login(data.username, data.password).subscribe(data => {
+        me.router.navigate(['/home'])
+        me.close.emit();
       }
+      );
+    }
     );
   }
 

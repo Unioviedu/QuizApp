@@ -7,7 +7,7 @@ import com.uniovi.quizapp.service.dto.section.ShortSectionDto;
 
 public interface ISectionManagement {
 	
-	public SectionDto getSectionByCod(String cod, String username);
+	public SectionDto getSectionByCod(Integer cod, String username);
 	
 	public List<ShortSectionDto> getSectionList(String username);
 

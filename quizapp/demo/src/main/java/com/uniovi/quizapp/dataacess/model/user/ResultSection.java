@@ -9,24 +9,24 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import com.uniovi.quizapp.dataacess.model.Level;
-import com.uniovi.quizapp.dataacess.model.Section;
+import org.bson.types.ObjectId;
+
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
+import com.uniovi.quizapp.dataacess.model.history.Section;
 
 public class ResultSection {
-	
-	private String codSection;
+	private ObjectId idSection;
 	private boolean isUnlocked;
 	private boolean isComplete;
 	private boolean isCompleteAll;
 	
-	private Map<String, ResultLevel> resultLevels = new HashMap<>();
+	private Map<ObjectId, ResultLevel> resultLevels = new HashMap<>();
 	private Set<ResultChallange> resultChallanges = new HashSet<>();
 	
 	public ResultSection() {}
 	
 	public ResultSection(Section section, List<Challange> challanges) {
-		this.codSection = section.getCodSection();
+		this.setIdSection(section.getId());
 		
 		createLevels(section);
 		createChallanges(challanges);
@@ -53,20 +53,12 @@ public class ResultSection {
 	}
 
 	private void createLevels(Section section) {
-		for (Level level: section.getLevels()) {
+		section.getLevels().stream().forEach(level -> {
 			ResultLevel rl = new ResultLevel(level);
-			
-			resultLevels.put(rl.getCodLevel(), rl);
-		}
+			resultLevels.put(rl.getId(), rl);
+		});
 	}
 	
-	
-	public Map<String, ResultLevel> getResultLevels() {
-		return resultLevels;
-	}
-	public void setResultLevels(Map<String, ResultLevel> resultLevels) {
-		this.resultLevels = resultLevels;
-	}
 	public boolean isUnlocked() {
 		return isUnlocked;
 	}
@@ -75,13 +67,7 @@ public class ResultSection {
 	}
 	
 	public void addResultLevel(ResultLevel rl) {
-		resultLevels.put(rl.getCodLevel(), rl);
-	}
-	public String getCodSection() {
-		return codSection;
-	}
-	public void setCodSection(String codSection) {
-		this.codSection = codSection;
+		resultLevels.put(rl.getId(), rl);
 	}
 
 	public Set<ResultChallange> getResultChallanges() {
@@ -111,6 +97,22 @@ public class ResultSection {
 
 	public void setCompleteAll(boolean isCompleteAll) {
 		this.isCompleteAll = isCompleteAll;
+	}
+
+	public ObjectId getIdSection() {
+		return idSection;
+	}
+
+	public void setIdSection(ObjectId idSection) {
+		this.idSection = idSection;
+	}
+
+	public Map<ObjectId, ResultLevel> getResultLevels() {
+		return resultLevels;
+	}
+
+	public void setResultLevels(Map<ObjectId, ResultLevel> resultLevels) {
+		this.resultLevels = resultLevels;
 	}
 	
 	

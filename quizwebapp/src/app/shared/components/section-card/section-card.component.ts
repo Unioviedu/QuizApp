@@ -18,14 +18,14 @@ export class SectionCardComponent implements OnInit {
   opacity:number = 1;
   disabledButton:boolean;
 
-  constructor(private router: Router, private sectionService: SectionsService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.createBadge();
   }
 
-  verSection(cod: string) {
-    this.router.navigate( ['/section', cod] );
+  verSection() {
+    this.router.navigate( ['/section', this.section.orden] );
   }
 
   createBadge() {

@@ -10,6 +10,8 @@ import { SectionComponent } from './components/section/section.component';
 import { LevelComponent } from './components/level/level.component';
 import { QuestionModule } from '../question/question.module';
 import { QuestionDirective } from './components/level/directives/question.directive';
+import { LevelGuard } from './services/level.guard';
+import { SectionsService } from './services/sections.service';
 
 @NgModule({
   imports: [
@@ -23,6 +25,9 @@ import { QuestionDirective } from './components/level/directives/question.direct
     SectionComponent,
     LevelComponent,
     QuestionDirective
+  ], providers: [
+    LevelGuard,
+    SectionsService
   ]
 })
 export class HistoryModule { }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.bson.types.ObjectId;
+
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
 import com.uniovi.quizapp.dataacess.model.user.ResultSection;
 
@@ -30,7 +32,7 @@ public class ChallangeFunction {
 	
 	private void createFunctions() {
 		allCorrectToFirst = result -> {
-			for (Map.Entry<String, ResultLevel> level : result.getResultLevels().entrySet()) {
+			for (Map.Entry<ObjectId, ResultLevel> level : result.getResultLevels().entrySet()) {
 				ResultLevel resultLevel = level.getValue();
 				if (resultLevel.getNumIncorrectQuestion() == 0 && resultLevel.getNumAttemps() == 1)
 					return true;
@@ -40,7 +42,7 @@ public class ChallangeFunction {
 		};
 		
 		allLevelsUnlock = result -> {
-			for (Map.Entry<String, ResultLevel> level : result.getResultLevels().entrySet()) {
+			for (Map.Entry<ObjectId, ResultLevel> level : result.getResultLevels().entrySet()) {
 				ResultLevel resultLevel = level.getValue();
 				if (!resultLevel.isUnlocked())
 					return false;
@@ -50,7 +52,7 @@ public class ChallangeFunction {
 		};
 		
 		allLevelsAllCorrect = result -> {
-			for (Map.Entry<String, ResultLevel> level : result.getResultLevels().entrySet()) {
+			for (Map.Entry<ObjectId, ResultLevel> level : result.getResultLevels().entrySet()) {
 				ResultLevel resultLevel = level.getValue();
 				if (!resultLevel.isComplete())
 					return false;

@@ -35,6 +35,10 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
+  isUniqueUsername(user: string) {
+    return this.http.get<any>(`${this.url}/uniqueUsername?username=${ user }`);
+  }
+
   register(newUser: any) {
     return this.http.post<any>(`${this.url}/register`, newUser);
   }

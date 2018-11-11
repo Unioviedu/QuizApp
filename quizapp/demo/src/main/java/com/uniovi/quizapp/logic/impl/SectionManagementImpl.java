@@ -2,13 +2,14 @@ package com.uniovi.quizapp.logic.impl;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
-import com.uniovi.quizapp.dataacess.model.Section;
+import com.uniovi.quizapp.dataacess.model.history.Section;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
 import com.uniovi.quizapp.dataacess.model.user.ResultSection;
 import com.uniovi.quizapp.dataacess.model.user.User;
@@ -36,7 +37,7 @@ public class SectionManagementImpl extends AbstractManagement implements ISectio
 
 		for (ShortSectionDto dto : sectionsDto) {
 			try {
-			ResultSection result = user.getResultSections().get(dto.getCodSection());
+			ResultSection result = user.getResultSections().get(new ObjectId(dto.getId()) );
 			dto.setUnlocked(result.isUnlocked());
 			dto.setCompleteAll(result.isCompleteAll());
 			} catch (Exception e) {
@@ -49,18 +50,20 @@ public class SectionManagementImpl extends AbstractManagement implements ISectio
 	}
 
 	@Override
-	public SectionDto getSectionByCod(String cod, String username) {
+	public SectionDto getSectionByCod(Integer cod, String username) {
 		Section section = sectionDao.findByCod(cod);
 		User user = userDao.findByUsername(username);
 		SectionDto sectionDto = mapper.convertValue(section, SectionDto.class);
 		
-		ResultSection rs = user.getResultSections().get(section.getCodSection());
+		ResultSection rs = user.getResultSections().get(section.getId());
 		sectionDto.setChallanges(rs.getResultChallanges());
 		
 		for (LevelDto level : sectionDto.getLevels()) {
 			try {
 				ResultLevel result = rs.getResultLevels()
-						.get(level.getCodLevel());
+						.get(new ObjectId(level.getId()));
+				level.setIdSection(section.getId().toString());
+				level.setCodSection(section.getOrden());
 				level.setComplete(result.isComplete());
 				level.setUnlocked(result.isUnlocked());
 				level.setNumAttemps(result.getNumAttemps());

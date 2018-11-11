@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.ICustomQuestionDao;
-import com.uniovi.quizapp.dataacess.dao.api.ILevelRankDao;
+import com.uniovi.quizapp.dataacess.dao.api.IRankDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
 import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
 import com.uniovi.quizapp.dataacess.model.question.StateQuestion;
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.api.ICustomQuestionManagement;
 import com.uniovi.quizapp.logic.general.AbstractManagement;
@@ -38,7 +38,7 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 	@Autowired
 	private IUserDao userDao;
 	@Autowired
-	private ILevelRankDao levelRankDao;
+	private IRankDao levelRankDao;
 	
 	
 	@Override
@@ -98,7 +98,7 @@ public class CustomQuestionManagementImpl extends AbstractManagement implements 
 		this.questionDao.responseQuestion(question.getId(), isCorrect);
 	}
 	
-	private LevelRank getCurrentLevelRank(User user) {
+	private Rank getCurrentLevelRank(User user) {
 		return levelRankDao.findByExp(user.getExperience());
 	}
 	

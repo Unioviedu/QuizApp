@@ -3,13 +3,20 @@ package com.uniovi.quizapp.service.dto.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ResultLevelDto {
 	
+	private String idSection;
+	private String idLevel;
+	
 	private String username;
-	private String codSection;
-	private String codLevel;
 	private int numCorrectQuestion;
 	private int numIncorrectQuestion;
+	private int expBase;
 	
 	private List<String> nextLevels = new ArrayList<>();
 	
@@ -18,18 +25,6 @@ public class ResultLevelDto {
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getCodSection() {
-		return codSection;
-	}
-	public void setCodSection(String codSection) {
-		this.codSection = codSection;
-	}
-	public String getCodLevel() {
-		return codLevel;
-	}
-	public void setCodLevel(String codLevel) {
-		this.codLevel = codLevel;
 	}
 	public int getNumCorrectQuestion() {
 		return numCorrectQuestion;
@@ -49,6 +44,26 @@ public class ResultLevelDto {
 	public void setNextLevels(List<String> nextLevels) {
 		this.nextLevels = nextLevels;
 	}
+	public int getExpBase() {
+		return expBase;
+	}
+	public void setExpBase(int expBase) {
+		this.expBase = expBase;
+	}
+	public ObjectId getIdSection() {
+		return new ObjectId(idSection);
+	}
+	public void setIdSection(String idSection) {
+		this.idSection = idSection;
+	}
+	public ObjectId getIdLevel() {
+		return new ObjectId(idLevel);
+	}
+	public void setIdLevel(String idLevel) {
+		this.idLevel = idLevel;
+	}
+	
+	
 		
 	
 	

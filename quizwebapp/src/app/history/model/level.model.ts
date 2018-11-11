@@ -1,7 +1,9 @@
 export class Level {
-    codSection: string;
-    codLevel: string;
+    id: string;
+    idSection: number;
+    codSection: number;
     name: string;
+    orden: number;
     main: boolean;
     unlocked: boolean;
     complete: boolean;

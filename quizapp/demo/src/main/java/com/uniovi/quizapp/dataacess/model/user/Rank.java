@@ -5,14 +5,14 @@ import org.mongodb.morphia.annotations.Entity;
 import com.uniovi.quizapp.dataacess.model.general.DefaultEntity;
 
 @Entity
-public class LevelRank extends DefaultEntity{
+public class Rank extends DefaultEntity{
 	
 	private String name;
 	private int experience;
 	
-	public LevelRank() {}
+	public Rank() {}
 	
-	public LevelRank(String name, int experience) {
+	public Rank(String name, int experience) {
 		super();
 		this.name = name;
 		this.experience = experience;

@@ -10,9 +10,12 @@ import com.uniovi.quizapp.dataacess.model.question.Question;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LevelDto {
-	private String codSection;
-	private String codLevel;
+	private String id;
+	private String idSection;
+	
+	private Integer codSection;
 	private String name;
+	private int orden;
 	private boolean isMain;
 	private boolean isUnlocked;
 	private boolean isComplete;
@@ -42,12 +45,6 @@ public class LevelDto {
 	}
 	public void setMain(boolean isMain) {
 		this.isMain = isMain;
-	}
-	public String getCodLevel() {
-		return codLevel;
-	}
-	public void setCodLevel(String codLevel) {
-		this.codLevel = codLevel;
 	}
 	public boolean isComplete() {
 		return isComplete;
@@ -85,12 +82,6 @@ public class LevelDto {
 	public void setNextLevels(List<String> nextLevels) {
 		this.nextLevels = nextLevels;
 	}
-	public String getCodSection() {
-		return codSection;
-	}
-	public void setCodSection(String codSection) {
-		this.codSection = codSection;
-	}
 	public int getExperience() {
 		return experience;
 	}
@@ -98,8 +89,30 @@ public class LevelDto {
 		this.experience = experience;
 	}
 	
+	public int getOrden() {
+		return orden;
+	}
+	public void setOrden(int orden) {
+		this.orden = orden;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Integer getCodSection() {
+		return codSection;
+	}
+	public void setCodSection(Integer codSection) {
+		this.codSection = codSection;
+	}
+	public String getIdSection() {
+		return idSection;
+	}
+	public void setIdSection(String idSection) {
+		this.idSection = idSection;
+	}
 	
 	
-	
-
 }

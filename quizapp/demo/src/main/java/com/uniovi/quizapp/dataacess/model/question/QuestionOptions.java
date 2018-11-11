@@ -5,13 +5,15 @@ import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
 
+import com.uniovi.quizapp.dataacess.model.formattedText.FormattedText;
+
 public class QuestionOptions extends Question {
 	@Embedded
 	private List<Option> options = new ArrayList<>();
 	
 	public QuestionOptions() {}
 
-	public QuestionOptions(String title, String statement) {
+	public QuestionOptions(String title, FormattedText statement) {
 		super(title, statement, "option");
 	}
 

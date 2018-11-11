@@ -55,7 +55,7 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 				.createUpdateOperations(getEntityClass())
 				.inc(field);
 		
-		datastore.update(query, operations);
+		update(query, operations);
 		return query.get();
 	}
 
@@ -69,7 +69,7 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 				.createUpdateOperations(getEntityClass())
 				.set("state", state);
 		
-		datastore.update(query, operations);
+		update(query, operations);
 		
 	}
 
@@ -84,7 +84,8 @@ public class CustomQuestionDaoImpl extends IDaoGenericImpl<CustomQuestion, Objec
 		UpdateOperations<CustomQuestion> operations = datastore
 				.createUpdateOperations(getEntityClass())
 				.inc(field);
-		datastore.update(query, operations);
+		
+		update(query, operations);
 		
 		return query.get();
 	}

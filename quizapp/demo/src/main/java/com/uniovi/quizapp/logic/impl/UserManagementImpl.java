@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.dao.api.IChallangeDao;
-import com.uniovi.quizapp.dataacess.dao.api.ILevelRankDao;
+import com.uniovi.quizapp.dataacess.dao.api.IRankDao;
 import com.uniovi.quizapp.dataacess.dao.api.ISectionDao;
 import com.uniovi.quizapp.dataacess.dao.api.IUserDao;
-import com.uniovi.quizapp.dataacess.model.Section;
 import com.uniovi.quizapp.dataacess.model.challange.Challange;
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.history.Section;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.User;
 import com.uniovi.quizapp.logic.api.IUserManagement;
 import com.uniovi.quizapp.logic.general.AbstractManagement;
@@ -27,7 +27,7 @@ public class UserManagementImpl extends AbstractManagement implements IUserManag
 	@Autowired
 	private IChallangeDao challangeDao;
 	@Autowired
-	private ILevelRankDao levelRankDao;
+	private IRankDao levelRankDao;
 
 	@Override
 	public UserDto getUser(String username) {
@@ -42,7 +42,7 @@ public class UserManagementImpl extends AbstractManagement implements IUserManag
 		Section firstSection = sectionDao.findFirstSection();
 		List<Challange> challanges = challangeDao.findAllChallangeSection();
 		List<Challange> trophies = challangeDao.findAllTrohpies();
-		LevelRank firstLevelRank = levelRankDao.findFirstLevelRank();
+		Rank firstLevelRank = levelRankDao.findFirstLevelRank();
 		
 		User user = new User(
 				userDto.getUsername(), 
@@ -57,6 +57,11 @@ public class UserManagementImpl extends AbstractManagement implements IUserManag
 		userDao.saveOrUpdate(user);
 				
 		return userDto;
+	}
+
+	@Override
+	public boolean isCorrectUsername(String username) {
+		return userDao.findByUsername(username) == null;
 	}
 
 	

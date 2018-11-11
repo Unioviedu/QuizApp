@@ -2,11 +2,12 @@ package com.uniovi.quizapp.logic.general;
 
 import java.util.Map;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.quizapp.dataacess.model.question.CustomQuestion;
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 import com.uniovi.quizapp.dataacess.model.user.ResultLevel;
 import com.uniovi.quizapp.dataacess.model.user.ResultSection;
@@ -27,8 +28,8 @@ public class CheckUserInfo {
 	}
 	
 	public User checkNewResult(ResultLevelDto newResult, User user) {
-		ResultSection resultSection = user.getResultSection(newResult.getCodSection());
-		ResultLevel oldResult = resultSection.getResultLevels().get(newResult.getCodLevel());
+		ResultSection resultSection = user.getResultSection(newResult.getIdSection());
+		ResultLevel oldResult = resultSection.getResultLevels().get(newResult.getIdLevel());
 
 		oldResult.sumNumAttemps();
 
@@ -38,18 +39,16 @@ public class CheckUserInfo {
 
 			if (isComplete(newResult) && !oldResult.isComplete()) {
 				oldResult.setComplete(true);
-				for (String codLevelUnlock : newResult.getNextLevels()) {
-					ResultLevel rl = resultSection.getResultLevels().get(codLevelUnlock);
+				
+				newResult.getNextLevels().forEach(cod -> {
+					ResultLevel rl = resultSection.getResultLevels().get(new ObjectId(cod));
 					rl.setUnlocked(true);
 					response.addLevel(rl.getName());
-				}
+				});
 			}
 		}
 		
-		int exp = getExpUser(oldResult.getExperience(),
-				newResult.getNumCorrectQuestion(), 
-				newResult.getNumIncorrectQuestion(), 
-				oldResult.getNumAttemps());
+		int exp = getExpUser(newResult, oldResult.getNumAttemps());
 		
 		user.sumExp(exp);
 		response.addExp(exp);
@@ -73,14 +72,14 @@ public class CheckUserInfo {
 	}
 	
 	public User checkSection(ResultLevelDto newResult, User user) {
-		ResultSection resultSection = user.getResultSection(newResult.getCodSection());
+		ResultSection resultSection = user.getResultSection(newResult.getIdSection());
 		
 		boolean isCompleteBefore = resultSection.isComplete();
 		
 		boolean isComplete = true;
 		boolean isCompleteAll = true;
 
-		for (Map.Entry<String, ResultLevel> level : resultSection.getResultLevels().entrySet()) {
+		for (Map.Entry<ObjectId, ResultLevel> level : resultSection.getResultLevels().entrySet()) {
 			if (!level.getValue().isComplete()) {
 				isCompleteAll = false;
 				if (level.getValue().isMain())
@@ -97,8 +96,8 @@ public class CheckUserInfo {
 		return user;
 	}
 
-	public User checkChallangesSection(User user, String codSection) {
-		ResultSection resultSection = user.getResultSection(codSection);
+	public User checkChallangesSection(User user, ObjectId idSection) {
+		ResultSection resultSection = user.getResultSection(idSection);
 		
 		for (ResultChallange challange : resultSection.getResultChallanges()) {
 			if (!challange.isComplete()) {
@@ -127,7 +126,7 @@ public class CheckUserInfo {
 		return user;
 	}
 	
-	public User checkLevelRank(User user, LevelRank newRank) {
+	public User checkLevelRank(User user, Rank newRank) {
 		if (!user.getLevelRank().equals(newRank)) {
 			response.setNewRank(newRank);
 			user.setLevelRank(newRank);
@@ -136,11 +135,10 @@ public class CheckUserInfo {
 		return user;
 	}
 	
-	private int getExpUser(int expBase, int correct, int incorrect, int numAttemps) {
-		int e = expBase * (correct - incorrect);
+	private int getExpUser(ResultLevelDto result, int numAttemps) {
+		int e = result.getExpBase() * (result.getNumCorrectQuestion() - result.getNumIncorrectQuestion());
 		return (int) (e / Math.pow(numAttemps, 2));
 	}
-
 	private boolean isComplete(ResultLevelDto newResult) {
 		return newResult.getNumCorrectQuestion() > newResult.getNumIncorrectQuestion();
 	}

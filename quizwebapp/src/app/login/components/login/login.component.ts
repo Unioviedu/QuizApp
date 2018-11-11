@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service'
 import { first } from 'rxjs/operators';
+import { ExceptionService } from '../../../shared/services/exception.service';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-login',
@@ -10,6 +13,8 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('myModal') myModal: ElementRef;
+
   loginForm: FormGroup;
   loading = false;
   loginFailed = false;
@@ -20,7 +25,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private exceptionService: ExceptionService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -53,9 +59,18 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
+                  if (error.status == 400) {
                     this.loginFailed = true;
-                    this.loading = false;
+                  } else {
+                    this.exceptionService.sendException(error.status);
+                  }
+
+                  this.loading = false;
                 });
+  }
+
+  onClose() {
+    jQuery(this.myModal.nativeElement).modal('hide');
   }
 
 }

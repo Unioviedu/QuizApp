@@ -2,10 +2,12 @@
     <h1 class="display-6">{{section.title}}</h1>
     <hr class="my-4">
     <p class="lead">Antes de comenzar a jugar, lee la documentación de la sección!</p>
-    <button class="btn btn-primary btn-lg" type="button" style="margin: 4px">Learn more</button>
-    <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Challanges
-  </button>
+    <button class="btn btn-primary btn-lg" type="button" style="margin: 4px" data-toggle="modal" data-target="#docModal">Learn
+        more</button>
+    <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
+        Challanges
+    </button>
 
     <div class="collapse" id="collapseExample">
         <div class="card" style="margin-top: 4px">
@@ -37,56 +39,17 @@
 
 </div>
 
-<div #myModal class="modal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div id="docModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-
-                <div *ngIf="newInfo.newRank" class="alert alert-success">
-                    <h6>New RankLevel:</h6> {{newInfo.newRank.name}}
-                </div>
-
-                <div *ngIf="newInfo.levelsUnlock.length > 0" class="alert alert-warning">
-                    <h6>Levels unlocked</h6>
-                    <ul>
-                        <li *ngFor="let level of newInfo.levelsUnlock">{{level}}</li>
-                    </ul>
-                </div>
-
-                <div *ngIf="newInfo.sectionsUnlock.length > 0" class="alert alert-warning">
-                    <h6>Sections unlocked</h6>
-                    <ul>
-                        <li *ngFor="let section of newInfo.sectionsUnlock">{{section}}</li>
-                    </ul>
-                </div>
-
-                <div *ngIf="newInfo.trophiesComplete.length > 0" class="alert alert-secondary">
-                    <h6>Trophies complete</h6>
-                    <ul>
-                        <li *ngFor="let result of newInfo.trophiesComplete">{{result.challange.title}}</li>
-                    </ul>
-                </div>
-
-                <div *ngIf="newInfo.challangesComplete.length > 0" class="alert alert-secondary">
-                    <h6>Challanges complete</h6>
-                    <ul>
-                        <li *ngFor="let result of newInfo.challangesComplete">{{result.challange.description}}</li>
-                    </ul>
-                </div>
-
-                <div class="alert alert-success">
-                    <h6>Bonification:</h6> {{newInfo.newExp}} exp
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <app-formatted-text [data]="section.documentation"></app-formatted-text>
             </div>
         </div>
     </div>

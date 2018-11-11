@@ -3,12 +3,13 @@ import { Challange } from './challange.model';
 
 export class Section {
     id: string;
-    codSection: string;
+    orden: number;
+    documentation: any;
     title: string;
     description: string;
     unlocked: boolean;
     completeAll: boolean;
     levels: Level[];
-    nextSections: String[];
+    nextSections: string[];
     challanges: Challange[];
 }

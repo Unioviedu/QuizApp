@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SectionsService } from '../../services/sections.service';
 
 import { Section } from '../../model/section.model';
 import { Level } from '../../model/level.model';
-import { InfoUser } from 'src/app/shared/model/info-user.model';
-
-declare var jQuery: any;
+import { FormattedTextComponent } from '../../../shared/components/formatted-text/formatted-text.component';
 
 @Component({
   selector: 'app-section',
@@ -14,17 +12,15 @@ declare var jQuery: any;
   styleUrls: ['./section.component.css']
 })
 export class SectionComponent implements OnInit {
-  @ViewChild('myModal') myModal;
-
+  @ViewChild(FormattedTextComponent) text;
   codSection: string;
   section: Section = new Section();
   levelsMain: Level[];
   levelsOptional: Level[];
 
-  newInfo: InfoUser = new InfoUser(undefined);
-
   constructor(private activatedRoute: ActivatedRoute,
-    private sectionsService: SectionsService) {
+    private sectionsService: SectionsService,
+    private router: Router) {
     this.activatedRoute.params.subscribe(params => {
       this.codSection = params['cod'];
     });
@@ -32,23 +28,18 @@ export class SectionComponent implements OnInit {
 
   ngOnInit() {
     this.loadLevels();
-
-    const newInfo = this.sectionsService.newInfo;
-
-    if (newInfo) {
-      this.newInfo = new InfoUser(newInfo);
-
-      jQuery(this.myModal.nativeElement).modal('show');
-      this.sectionsService.changeInfo(null);
-    }
   }
 
   loadLevels() {
     this.sectionsService.getSection(this.codSection)
-      .subscribe(data => {
+      .subscribe(
+      data => {
         this.section = data;
         this.levelsMain = data.levels.filter(level => level.main).sort((a, b) => a.name.localeCompare(b.name));
         this.levelsOptional = data.levels.filter(level => !level.main).sort((a, b) => a.name.localeCompare(b.name));
+      }, 
+      error => {
+        this.router.navigate( ['/sections'] );
       }
       );
   }

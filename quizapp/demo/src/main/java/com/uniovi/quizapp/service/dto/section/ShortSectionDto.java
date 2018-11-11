@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ShortSectionDto {
 	
 	private String id;
-	private String codSection;
+	private int orden;
 	private String title;
 	private String description;
 	private boolean isUnlocked;
@@ -28,12 +28,7 @@ public class ShortSectionDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getCodSection() {
-		return codSection;
-	}
-	public void setCodSection(String codSection) {
-		this.codSection = codSection;
-	}
+
 	public boolean isUnlocked() {
 		return isUnlocked;
 	}
@@ -57,6 +52,12 @@ public class ShortSectionDto {
 	}
 	public void setNextSections(List<String> nextSections) {
 		this.nextSections = nextSections;
+	}
+	public int getOrden() {
+		return orden;
+	}
+	public void setOrden(int orden) {
+		this.orden = orden;
 	}
 	
 	

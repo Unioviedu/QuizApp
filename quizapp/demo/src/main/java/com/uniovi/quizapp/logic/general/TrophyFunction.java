@@ -22,7 +22,7 @@ public class TrophyFunction {
 	
 	private void createFunctions() {
 		firstSectionComplete = user -> {
-			return user.getResultSection("1").isCompleteAll();
+			return user.getResultSections().entrySet().size() > 1;
 		};
 		
 		functions.put(FIRST_SECTION_COMPLETE, firstSectionComplete);

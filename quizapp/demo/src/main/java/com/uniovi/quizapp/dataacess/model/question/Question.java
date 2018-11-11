@@ -2,6 +2,7 @@ package com.uniovi.quizapp.dataacess.model.question;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.uniovi.quizapp.dataacess.model.formattedText.FormattedText;
 
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME, 
@@ -15,24 +16,22 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class Question {
 	private String title;
 	private String type;
-	private String statement;
-	private String codeBlock;
-	private String programmingLanguage;
+	private FormattedText statement;
 	
 	public Question() {}
 
-	public Question(String title, String statement, String type) {
+	public Question(String title, FormattedText statement, String type) {
 		super();
 		this.title = title;
 		this.statement = statement;
 		this.type = type;
 	}
 
-	public String getStatement() {
+	public FormattedText getStatement() {
 		return statement;
 	}
 
-	public void setStatement(String statement) {
+	public void setStatement(FormattedText statement) {
 		this.statement = statement;
 	}
 
@@ -51,20 +50,6 @@ public abstract class Question {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public String getCodeBlock() {
-		return codeBlock;
-	}
-
-	public void setCodeBlock(String codeBlock, String programmingLanguague) {
-		this.codeBlock = codeBlock;
-		this.programmingLanguage = programmingLanguague;
-	}
-
-	public String getProgrammingLanguage() {
-		return programmingLanguage;
-	}
-	
 	
 	
 	

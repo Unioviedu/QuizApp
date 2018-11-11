@@ -4,12 +4,14 @@ import { QuestionOptionsComponent } from './components/question-options/question
 import { QuestionCodeBlockComponent } from './components/question-code-block/question-code-block.component';
 import { HighlightJsModule } from 'ngx-highlight-js';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     HighlightJsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [QuestionOptionsComponent, QuestionCodeBlockComponent],
   entryComponents: [QuestionOptionsComponent, QuestionCodeBlockComponent],

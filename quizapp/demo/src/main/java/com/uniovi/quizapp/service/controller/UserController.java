@@ -27,6 +27,12 @@ public class UserController implements IUserController {
 	public UserDto register(@RequestBody UserDto userDto) {
 		return userManagement.registerNewUser(userDto);
 	}
+
+	@Override
+	@RequestMapping("/uniqueUsername")
+	public boolean isUniqueUsername(@RequestParam("username") String username) {
+		return userManagement.isCorrectUsername(username);
+	}
 	
 	
 

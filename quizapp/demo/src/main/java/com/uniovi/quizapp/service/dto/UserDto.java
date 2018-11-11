@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.uniovi.quizapp.dataacess.model.user.LevelRank;
+import com.uniovi.quizapp.dataacess.model.user.Rank;
 import com.uniovi.quizapp.dataacess.model.user.ResultChallange;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,7 +14,7 @@ public class UserDto {
 	private String password;
 	private int experience;
 	private String mail;
-	private LevelRank levelRank;
+	private Rank levelRank;
 	
 	private Set<ResultChallange> resultTrophies = new HashSet<>();
 	
@@ -42,10 +42,10 @@ public class UserDto {
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-	public LevelRank getLevelRank() {
+	public Rank getLevelRank() {
 		return levelRank;
 	}
-	public void setLevelRank(LevelRank levelRank) {
+	public void setLevelRank(Rank levelRank) {
 		this.levelRank = levelRank;
 	}
 	public Set<ResultChallange> getResultTrophies() {

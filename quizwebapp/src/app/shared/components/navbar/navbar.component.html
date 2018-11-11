@@ -19,7 +19,9 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" (click)="goComponent('/profile')" i18n="navbar.li.SECTIONS">Profile</a>
             </li>
-
+            <li class="nav-item" routerLinkActive="active">
+                <a class="btn btn-danger btn-sm" [routerLink]="['/login']" style="margin: 5px">Close session</a>
+            </li>
         </ul>
     </div>
 </nav>

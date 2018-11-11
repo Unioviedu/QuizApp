@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uniovi.quizapp.dataacess.model.general.IEntity;
 
-public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> {
+public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> implements IDaoGeneric<ENTITY, ID>{
 	
 	@Autowired
 	public Datastore datastore;
@@ -34,6 +35,12 @@ public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> {
 				.asList();
 	}
 	
+	public List<ENTITY> findByField (String field, Integer fieldValue) {
+		return datastore.createQuery(getEntityClass())
+				.field(field).equal(fieldValue)
+				.asList();
+	}
+	
 	public void delete (ENTITY entity) {
 		datastore.delete(entity);
 	}
@@ -44,6 +51,10 @@ public abstract class IDaoGenericImpl<ENTITY extends IEntity, ID> {
 				.field("id").equal(id);
 		
 		datastore.delete(entityById);
+	}
+	
+	public boolean update(Query<ENTITY> query, UpdateOperations<ENTITY> operations) {
+		return datastore.update(query, operations).getUpdatedExisting();
 	}
 	
 	public abstract Class<ENTITY> getEntityClass();

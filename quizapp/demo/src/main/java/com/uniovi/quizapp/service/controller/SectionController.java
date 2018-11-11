@@ -20,7 +20,7 @@ public class SectionController implements ISectionController {
 	private ISectionManagement sectionManagement;
 	
 	@RequestMapping("/section/{cod}")
-	public SectionDto getSection(@PathVariable("cod") String cod,
+	public SectionDto getSection(@PathVariable("cod") Integer cod,
 									  @RequestParam("username") String username) {
 		return sectionManagement.getSectionByCod(cod, username);
 	}

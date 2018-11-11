@@ -1,20 +1,23 @@
-package com.uniovi.quizapp.dataacess.model;
+package com.uniovi.quizapp.dataacess.model.history;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.uniovi.quizapp.dataacess.model.question.Question;
 
 public class Level {
 	
-	private String codSection;
-	private String codLevel;
+	@JsonSerialize(using = ToStringSerializer.class)
+	private ObjectId id;
+	private int orden;
 	private boolean isMain;
-	private boolean isFirst;
 	private String title;
 	private int experience;
 	
@@ -25,9 +28,8 @@ public class Level {
 	
 	public Level() {}
 	
-	public Level(String codLevel, boolean isMain, String title, int experience) {
-		super();
-		this.codLevel = codLevel;
+	public Level(boolean isMain, String title, int experience) {
+		this.id = new ObjectId();
 		this.isMain = isMain;
 		this.title = title;
 		this.experience = experience;
@@ -48,14 +50,6 @@ public class Level {
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
 	}
-	
-	public String getCodLevel() {
-		return codLevel;
-	}
-	
-	public void setCodLevel(String codLevel) {
-		this.codLevel = codLevel;
-	}
 
 	public boolean isMain() {
 		return isMain;
@@ -69,6 +63,14 @@ public class Level {
 		for (Question question: questions) 
 			this.questions.add(question);
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public List<String> getNextLevels() {
 		return nextLevels;
@@ -77,26 +79,10 @@ public class Level {
 	public void setNextLevels(List<String> nextLevels) {
 		this.nextLevels = nextLevels;
 	}
-	
+
 	public void addNextLevels(Level... levels) {
 		for (Level level: levels)
-			this.nextLevels.add(level.getCodLevel());
-	}
-
-	public boolean isFirst() {
-		return isFirst;
-	}
-
-	public void setFirst(boolean isFirst) {
-		this.isFirst = isFirst;
-	}
-
-	public String getCodSection() {
-		return codSection;
-	}
-
-	public void setCodSection(String codSection) {
-		this.codSection = codSection;
+			this.nextLevels.add(level.getId().toString());
 	}
 
 	public int getExperience() {
@@ -105,6 +91,26 @@ public class Level {
 
 	public void setExperience(int experience) {
 		this.experience = experience;
+	}
+
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int orden) {
+		this.orden = orden;
+	}
+	
+	public boolean isFirst() {
+		return orden == 1;
+	}
+
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
 	
 	

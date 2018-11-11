@@ -9,6 +9,6 @@ public interface ISectionController {
 	
 	public List<ShortSectionDto> getSectionList(String username);
 	
-	public SectionDto getSection(String codSection, String username);
+	public SectionDto getSection(Integer codSection, String username);
 
 }
